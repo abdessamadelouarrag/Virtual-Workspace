@@ -154,41 +154,48 @@ subForm.addEventListener('click', (e) => {
     newDiv.addEventListener('click', () => {
         const infoPopup = document.createElement("div");
 
-        let expPart = '';
+        let expPart = ``;
 
         workers.experience.forEach(exp => {
             expPart += `
-            <div class="expTest border-[5px] border-green-200 text-green-700 p-3">
-                <h3 class="font-bold text-black text-center uppercase">experience</h3>
-                    <div class="experience pt-2 mt-2 text-sm">
-                        <h5><span class="font-semibold">Poste :</span> ${exp.poste}</h5>
-                        <h5><span class="font-semibold">Startup :</span> ${exp.startup}</h5>
-                        <h5><span class="font-semibold">Début :</span> ${exp.dateStartExp}</h5>
-                        <h5><span class="font-semibold">Fin :</span> ${exp.dateEndExp}</h5>
-                    </div>
+            <br>
+             <h3 class="col-span-4 text-center font-bold text-black text-lg uppercase mt-4">Expériences</h3>
+        <div class="expCard border-2 border-green-300 flex flex-wrap bg-green-50 rounded-xl p-4 shadow-md">
+            <div class="experience text-sm mt-3">
+                <p><span class="font-semibold">Poste :</span> ${exp.poste}</p>
+                <p><span class="font-semibold">Startup :</span> ${exp.startup}</p>
+                <p><span class="font-semibold">Début :</span> ${exp.dateStartExp}</p>
+                <p><span class="font-semibold">Fin :</span> ${exp.dateEndExp}</p>
             </div>
         </div>
         `;
-
-
         });
 
+
         infoPopup.innerHTML = `
-         <div class="all-info-popup bg-white w-[100%] max-w-lg rounded-2xl shadow-xl p-2 h-full">
-        
-            <div class="grid grid-cols-4 gap-5 w-full bg-white rounded-2xl p-8 overflow-scroll [scrollbar-width:none]">
-                <img src="${workers.image}" alt="Worker image" class="w-28 h-28 object-cover rounded-xl shadow-md">
-                <div class="infos gap-2 text-blue-700 text-sm border-[5px] p-3 col-span-3">
-                    <h3 class="font-bold text-black text-center">INFO GLOBAL</h3>
-                    <h5><span class="font-semibold">Nom :</span> ${workers.nom}</h5>
-                    <h5><span class="font-semibold">Prénom :</span> ${workers.prenom}</h5>
-                    <h5><span class="font-semibold">Rôle :</span>${workers.role}</h5>
-                    <h5><span class="font-semibold">Email :</span> ${workers.email}</h5>
-                </div>
-              
+    <div class="all-info-popup bg-white w-full max-w-lg rounded-2xl shadow-xl p-4 h-full">
+
+        <div class="grid grid-cols-[1fr 2fr] gap-5 p-5 overflow-scroll [scrollbar-width:none]">
+
+            <img src="${workers.image}" 
+                 alt="Worker image" 
+                 class="w-28 h-28 object-cover rounded-xl shadow-md">
+
+            <div class="infos gap-2 text-blue-700 text-sm border-[5px] h-[150px] p-3 col-span-1 rounded-xl">
+                <h3 class="font-bold text-black text-center">INFO GLOBAL</h3>
+                <h5><span class="font-semibold">Nom :</span> ${workers.nom}</h5>
+                <h5><span class="font-semibold">Prénom :</span> ${workers.prenom}</h5>
+                <h5><span class="font-semibold">Rôle :</span> ${workers.role}</h5>
+                <h5><span class="font-semibold">Email :</span> ${workers.email}</h5>
             </div>
+
+            <div class="col-span-2">
+                ${expPart || "No Experiences"}
+            </div>
+
         </div>
-                `
+    </div>
+    `;
 
         const sectionPopup = document.querySelector(".info-popup");
         sectionPopup.innerHTML = '';
