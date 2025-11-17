@@ -6,10 +6,13 @@ const imagePreview = document.querySelector("#imagePreview");
 const placeholderText = document.querySelector("#placeholderText");
 const bordCreate = document.querySelector(".place-workers");
 
+//btn for add new worker
 btnAdd.addEventListener('click', () => {
     sectionForm.classList.remove("hidden")
 })
 
+
+//for close form if i click in body with out this form
 document.body.addEventListener('click', (e) => {
     if (e.target === sectionForm) {
         sectionForm.classList.add("hidden");
@@ -19,7 +22,7 @@ document.body.addEventListener('click', (e) => {
 });
 
 
-
+//for show url image in image preview
 imageUrl.addEventListener('input', () => {
     const url = imageUrl.value.trim();
 
@@ -38,7 +41,7 @@ imageUrl.addEventListener('input', () => {
 const btnSupprimer = document.querySelector(".btn-supp-exp");
 const formExperience = document.querySelector(".form-experience");
 
-
+//btn for add experience 
 btnExperience.addEventListener('click', () => {
     console.log(formExperience)
     formExperience.innerHTML += `<div class="form-exper bg-blue-900/10 border-[2px] rounded-2xl p-3 mt-6">
@@ -76,6 +79,7 @@ btnExperience.addEventListener('click', () => {
                         </label>
                     </div>`
 
+    //part for delet form of experience 
     let supBtns = document.querySelectorAll('.btn-supp-exp')
     supBtns.forEach((btn) => {
         btn.addEventListener('click', () => {
@@ -84,6 +88,7 @@ btnExperience.addEventListener('click', () => {
     })
 })
 
+//for stock info workers
 let infoWorker = [];
 
 const inputNom = document.querySelector("#nom-worker");
@@ -92,8 +97,7 @@ const emailWorker = document.querySelector("#email-worker");
 const imageWorker = document.querySelector("#imageUrl");
 const roleWorker = document.querySelector("#role-worker");
 
-//exp 
-
+//part submit of form
 const subForm = document.querySelector("#form-sub");
 
 subForm.addEventListener('click', (e) => {
@@ -154,7 +158,7 @@ subForm.addEventListener('click', (e) => {
 
         workers.experience.forEach(exp => {
             expPart += `
-            <div class="expTest border-[5px] border-green-200 text-green-700 col-span-2 p-3">
+            <div class="expTest border-[5px] border-green-200 text-green-700 p-3">
                 <h3 class="font-bold text-black text-center uppercase">experience</h3>
                     <div class="experience pt-2 mt-2 text-sm">
                         <h5><span class="font-semibold">Poste :</span> ${exp.poste}</h5>
@@ -170,9 +174,9 @@ subForm.addEventListener('click', (e) => {
         });
 
         infoPopup.innerHTML = `
-         <div class="all-info-popup bg-white w-[100%] max-w-lg rounded-2xl shadow-xl p-2 h-screen">
+         <div class="all-info-popup bg-white w-[100%] max-w-lg rounded-2xl shadow-xl p-2 h-full">
         
-            <div class="grid grid-cols-4 gap-5 w-full bg-white rounded-2xl h-screen p-8 overflow-scroll [scrollbar-width:none]">
+            <div class="grid grid-cols-4 gap-5 w-full bg-white rounded-2xl p-8 overflow-scroll [scrollbar-width:none]">
                 <img src="${workers.image}" alt="Worker image" class="w-28 h-28 object-cover rounded-xl shadow-md">
                 <div class="infos gap-2 text-blue-700 text-sm border-[5px] p-3 col-span-3">
                     <h3 class="font-bold text-black text-center">INFO GLOBAL</h3>
@@ -181,10 +185,7 @@ subForm.addEventListener('click', (e) => {
                     <h5><span class="font-semibold">Rôle :</span>${workers.role}</h5>
                     <h5><span class="font-semibold">Email :</span> ${workers.email}</h5>
                 </div>
-            </div>
-            <div class="zone-for-exp">
-                <h3 class="text-black font-bold">All Experience</h3>
-                ${expPart}
+              
             </div>
         </div>
                 `
