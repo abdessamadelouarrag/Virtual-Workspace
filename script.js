@@ -17,6 +17,7 @@ document.body.addEventListener('click', (e) => {
     if (e.target === sectionForm) {
         sectionForm.classList.add("hidden");
         const form = sectionForm.querySelector("form");
+        formExperience.innerHTML = ``;
         form.reset();
     }
 });
@@ -103,6 +104,35 @@ const subForm = document.querySelector("#form-sub");
 subForm.addEventListener('click', (e) => {
     e.preventDefault();
 
+    const nomRegex = /^[A-Za-z]{3,}$/;
+    const prenomRegex =  /^[A-Za-z]{3,}$/;
+    const roleRegex = /^[A-Za-z\s]{2,}$/;
+    const emailRegex = /^[\w.-]+@[\w.-]+\.\w+$/;
+    const imageurlRegex = /^https?:\/\//;
+
+    const nom = inputNom.value.trim();
+    const prenom = inputPrenom.value.trim();
+    const email = emailWorker.value.trim();
+    const role = roleWorker.value.trim();
+    const imagE = imageWorker.value.trim();
+
+    if(!nomRegex.test(nom)){
+        alert("invalide nom !!!")
+        return;
+    }
+    if(!prenomRegex.test(prenom)){
+        alert("invalide prenom !!!")
+        return;
+    }
+    if(!emailRegex.test(email)){
+        alert("email invalide !!!");
+        return;
+    }
+    if(!imageurlRegex.test(imagE)){
+        alert("invalide url image !!!");
+        return;
+    }
+
     let experienceWorker = [];
 
     const formExperiences = document.querySelectorAll(".form-exper");
@@ -117,11 +147,16 @@ subForm.addEventListener('click', (e) => {
     });
 
 
+     if(!roleRegex.test(role)){
+        alert("invalide role !!!");
+        return;
+    }
+
     const workers = {
-        nom: inputNom.value,
-        prenom: inputPrenom.value,
-        email: emailWorker.value,
-        image: imageWorker.value,
+        nom,
+        prenom,
+        email,
+        imagE,
         role: roleWorker.value,
         experience: experienceWorker,
     }
@@ -135,7 +170,7 @@ subForm.addEventListener('click', (e) => {
 
     newDiv.innerHTML = `
    <img 
-     src="${workers.image}" 
+     src="${workers.imagE}" 
      class="w-[40px] h-[40px] object-cover rounded-xl border"
    />
    <div class="grid gap-1">
@@ -173,11 +208,11 @@ subForm.addEventListener('click', (e) => {
 
 
         infoPopup.innerHTML = `
-    <div class="all-info-popup bg-white w-full max-w-lg rounded-2xl shadow-xl p-4 h-full">
+    <div class="all-info-popup bg-white w-full max-w-lg rounded-2xl shadow-xl p-4 h-[60vh] overflow-scroll [scrollbar-width:none]">
 
-        <div class="grid grid-cols-[1fr 2fr] gap-5 p-5 overflow-scroll [scrollbar-width:none]">
+        <div class="grid grid-cols-[1fr 2fr] gap-5 p-5">
 
-            <img src="${workers.image}" 
+            <img src="${workers.imagE}" 
                  alt="Worker image" 
                  class="w-28 h-28 object-cover rounded-xl shadow-md">
 
@@ -207,8 +242,14 @@ subForm.addEventListener('click', (e) => {
                 sectionPopup.classList.add("hidden");
             }
         });
+    });
 
-    })
+    formExperience.innerHTML = ``;
+    sectionForm.classList.add("hidden");
+    sectionForm.querySelector("form").reset()
+    imagePreview.src = '';
+    imagePreview.classList.add("hidden");
+    placeholderText.classList.remove("hidden")
 })
 
 
