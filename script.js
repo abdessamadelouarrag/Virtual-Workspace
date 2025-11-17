@@ -1,0 +1,201 @@
+const sectionForm = document.querySelector(".form-worker");
+const btnAdd = document.getElementById("add-new-worker");
+const btnExperience = document.querySelector(".btn-add-experience");
+const imageUrl = document.querySelector('#imageUrl');
+const imagePreview = document.querySelector("#imagePreview");
+const placeholderText = document.querySelector("#placeholderText");
+const bordCreate = document.querySelector(".place-workers");
+
+btnAdd.addEventListener('click', () => {
+    sectionForm.classList.remove("hidden")
+})
+
+document.body.addEventListener('click', (e) => {
+    if (e.target === sectionForm) {
+        sectionForm.classList.add("hidden");
+        const form = sectionForm.querySelector("form");
+        form.reset();
+    }
+});
+
+
+
+imageUrl.addEventListener('input', () => {
+    const url = imageUrl.value.trim();
+
+    if (url) {
+        imagePreview.src = url;
+        imagePreview.classList.remove("hidden");
+        placeholderText.classList.add("hidden")
+    }
+    else {
+        imagePreview.src = '';
+        imagePreview.classList.add("hidden");
+        placeholderText.classList.remove("hidden");
+    }
+})
+
+const btnSupprimer = document.querySelector(".btn-supp-exp");
+const formExperience = document.querySelector(".form-experience");
+
+
+btnExperience.addEventListener('click', () => {
+    console.log(formExperience)
+    formExperience.innerHTML += `<div class="form-exper bg-blue-900/10 border-[2px] rounded-2xl p-3 mt-6">
+                        <div class="flex justify-between">
+                            <h1 class="text-2xl font-semibold mb-6">Ajouter une Expérience</h1>
+                            <button class="btn-supp-exp text-red-600 uppercase font-bold" type="button">supprimer</button>
+                        </div>
+    
+    
+                        <label class="flex flex-col mt-2">
+                            <span class="text-sm font-medium mb-2">Poste occupé</span>
+                            <input name="poste" type="text" required placeholder="Ex : Développeur IT"
+                                class="post-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+                        </label>
+    
+    
+                        <label class="flex flex-col mt-4">
+                            <span class="text-sm font-medium mb-2">Nom de la Startup / Entreprise</span>
+                            <input name="startup" type="text" required placeholder="Ex : TechWave Solutions"
+                                class="startup-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+                        </label>
+    
+    
+                        <label class="flex flex-col mt-4">
+                            <span class="text-sm font-medium mb-2">Date de début</span>
+                            <input name="date_debut" type="date" required
+                                class="datestar-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+                        </label>
+    
+    
+                        <label class="flex flex-col mt-4">
+                            <span class="text-sm font-medium mb-2">Date de fin</span>
+                            <input name="date_fin" type="date"
+                                class="dateend-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
+                        </label>
+                    </div>`
+
+    let supBtns = document.querySelectorAll('.btn-supp-exp')
+    supBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+            btn.parentElement.parentElement.remove()
+        })
+    })
+})
+
+let infoWorker = [];
+
+const inputNom = document.querySelector("#nom-worker");
+const inputPrenom = document.querySelector("#prenom-worker");
+const emailWorker = document.querySelector("#email-worker");
+const imageWorker = document.querySelector("#imageUrl");
+const roleWorker = document.querySelector("#role-worker");
+
+//exp 
+
+const subForm = document.querySelector("#form-sub");
+
+subForm.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    let experienceWorker = [];
+
+    const formExperiences = document.querySelectorAll(".form-exper");
+
+    formExperiences.forEach(expDiv => {
+        const poste = expDiv.querySelector('input[name="poste"]').value;
+        const startup = expDiv.querySelector('input[name="startup"]').value;
+        const dateStartExp = expDiv.querySelector('input[name="date_debut"]').value;
+        const dateEndExp = expDiv.querySelector('input[name="date_fin"]').value;
+
+        experienceWorker.push({ poste, startup, dateStartExp, dateEndExp });
+    });
+
+
+    const workers = {
+        nom: inputNom.value,
+        prenom: inputPrenom.value,
+        email: emailWorker.value,
+        image: imageWorker.value,
+        role: roleWorker.value,
+        experience: experienceWorker,
+    }
+
+    infoWorker.push(workers);
+
+    const newDiv = document.createElement('div');
+
+    newDiv.className =
+        "newOne flex items-center gap-4 mt-3 bg-white shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer hover:bg-blue-100/90";
+
+    newDiv.innerHTML = `
+   <img 
+     src="${workers.image}" 
+     class="w-[40px] h-[40px] object-cover rounded-xl border"
+   />
+   <div class="grid gap-1">
+      <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
+        <span class="font-normal text-gray-600">${workers.nom}</span>
+      </h5> 
+
+      <h5 class="text-[12px] font-semibold text-red-800">ROLE : 
+        <span class="font-normal text-gray-600">${workers.role}</span>
+      </h5>
+   </div>
+`;
+
+
+    bordCreate.append(newDiv);
+    newDiv.addEventListener('click', () => {
+        const infoPopup = document.createElement("div");
+
+        let expPart = '';
+
+        workers.experience.forEach(exp => {
+            expPart += `
+        <div class="experience pt-2 mt-2 text-sm">
+            <h5><span class="font-semibold">Poste :</span> ${exp.poste}</h5>
+            <h5><span class="font-semibold">Startup :</span> ${exp.startup}</h5>
+            <h5><span class="font-semibold">Début :</span> ${exp.dateStartExp}</h5>
+            <h5><span class="font-semibold">Fin :</span> ${exp.dateEndExp}</h5>
+        </div>
+        `;
+        });
+
+        infoPopup.innerHTML = `
+        <div class="all-info-popup bg-white w-[100%] max-w-lg rounded-2xl shadow-xl p-2">
+        
+        <div class="grid grid-cols-4 gap-5 w-full bg-white rounded-2xl p-8 h-screen overflow-y-scroll [scrollbar-width:none]">
+            
+            <img src="${workers.image}" alt="Worker image" class="w-28 h-28 object-cover rounded-xl shadow-md">
+            <div class="infos grid gap-2 text-blue-700 text-sm border-[5px] p-3 col-span-3">
+                <h3 class="font-bold text-black text-center">INFO GLOBAL</h3>
+                <h5><span class="font-semibold">Nom :</span> ${workers.nom}</h5>
+                <h5><span class="font-semibold">Prénom :</span> ${workers.prenom}</h5>
+                <h5><span class="font-semibold">Rôle :</span>${workers.role}</h5>
+                <h5><span class="font-semibold">Email :</span> ${workers.email}</h5>
+            </div>
+            <div class="border-[5px] border-green-200 text-green-700 col-span-2 p-3">
+            <h3 class="font-bold text-black text-center uppercase">experience</h3>
+                <h5 class="font-semibold">${expPart}</h5> 
+            </div>
+           
+        </div>`
+
+        const sectionPopup = document.querySelector(".info-popup");
+        sectionPopup.innerHTML = '';
+        sectionPopup.classList.remove("hidden");
+        sectionPopup.append(infoPopup);
+
+        document.body.addEventListener('click', (e) => {
+            if (e.target === sectionPopup) {
+                sectionPopup.classList.add("hidden");
+            }
+        });
+
+    })
+})
+
+
+

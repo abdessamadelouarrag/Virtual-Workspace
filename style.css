@@ -1,0 +1,54 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    background-color: black;
+}
+
+.image-global{
+    background: url(/plan-69159a65c5684763515973.jpg);
+    width: 80vw;
+    height: 90vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.all-roomes{
+    display: grid;
+    grid-template-columns: 37.5% 17.5% 22.5% 22.5%;
+    grid-template-rows: repeat(3 , 1fr);
+}
+
+.box1{
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.box2{
+    grid-column: 3 / 4;
+    grid-row: 1 / 2;
+}
+
+.box3{
+    grid-column: 4 / 5;
+    grid-row: 1 / 2;
+}
+
+.box4{
+    grid-column: 1 / 2;
+    grid-row: 2 / 4;
+}
+
+.box5{
+    grid-column: 3 / 4;
+    grid-row: 3 / 4;
+}
+
+.box6{
+    grid-column: 4 / 5;
+    grid-row: 3 / 4;
+}
