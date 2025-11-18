@@ -5,6 +5,8 @@ const imageUrl = document.querySelector('#imageUrl');
 const imagePreview = document.querySelector("#imagePreview");
 const placeholderText = document.querySelector("#placeholderText");
 const bordCreate = document.querySelector(".place-workers");
+const formExperience = document.querySelector(".form-experience");
+const subForm = document.querySelector("#form-sub");
 
 //btn for add new worker
 btnAdd.addEventListener('click', () => {
@@ -15,12 +17,19 @@ btnAdd.addEventListener('click', () => {
 //for close form if i click in body with out this form
 document.body.addEventListener('click', (e) => {
     if (e.target === sectionForm) {
-        sectionForm.classList.add("hidden");
-        const form = sectionForm.querySelector("form");
-        formExperience.innerHTML = ``;
-        form.reset();
+        closeForm();
     }
 });
+
+function closeForm() {
+    sectionForm.classList.add("hidden");
+    const form = sectionForm.querySelector("form");
+    formExperience.innerHTML = '';
+    form.reset();
+    imagePreview.src = '';
+    imagePreview.classList.add("hidden");
+    placeholderText.classList.remove("hidden");
+}
 
 
 //for show url image in image preview
@@ -38,9 +47,6 @@ imageUrl.addEventListener('input', () => {
         placeholderText.classList.remove("hidden");
     }
 })
-
-const btnSupprimer = document.querySelector(".btn-supp-exp");
-const formExperience = document.querySelector(".form-experience");
 
 //btn for add experience 
 btnExperience.addEventListener('click', () => {
@@ -106,7 +112,6 @@ const imageWorker = document.querySelector("#imageUrl");
 const roleWorker = document.querySelector("#role-worker");
 
 //part submit of form
-const subForm = document.querySelector("#form-sub");
 
 subForm.addEventListener('click', (e) => {
     e.preventDefault();
@@ -259,41 +264,121 @@ subForm.addEventListener('click', (e) => {
     imagePreview.src = '';
     imagePreview.classList.add("hidden");
     placeholderText.classList.remove("hidden")
-
-
-
-    const roomS = document.querySelectorAll(".btn-add");
-    const roomSecurity = document.querySelector("#salle-securite")
-
-
-    roomS.forEach((room) => {
-
-        room.addEventListener('click', () => {
-            for (let i = 0; i < infoWorker.length; i++) {
-                if (infoWorker[i].role === "securite") {
-
-                    const roomWorker = document.createElement("div");
-
-                    roomWorker.className = "room-here"
-                    roomWorker.innerHTML = `
-                    <div class="grid grid-cols-3 place-self-center bg-amber-300 rounded-2xl mb-3">
-                        <button class="btn-delet-worker"><i class="fas fa-x text-[5px]"></i></button>
-                        <img src="${workers.imagE}" alt="" class="w-8 h-8 object-cover rounded-3xl p-1">
-                    </div>`
-                    roomSecurity.append(roomWorker)
-                    bordCreate.innerHTML = ``;
-                    break;
-                }
-            }
-        })
-    })
-
-    const deletRom = document.querySelector(".btn-delet-worker");
-    const newRomm = document.querySelector(".room-here");
-
-    deletRom.addEventListener('click', () => {
-        newRomm.remove();
-    } )
 })
 
-// })
+const roombtnConfirence = document.querySelector(".btn-add-conference");
+const roombtnServeurs = document.querySelector(".btn-add-serveurs");
+const roombtnSecurite = document.querySelector(".btn-add-securite");
+const roombtnReseption = document.querySelector(".btn-add-reseption");
+const roombtnPersonnel = document.querySelector(".btn-add-personnel");
+const roombtnArchives = document.querySelector(".btn-add-archives");
+
+
+
+roombtnConfirence.addEventListener('click', () => {
+    for (let i = 0; i < infoWorker.length; i++) {
+        const role = infoWorker[i].role.toLowerCase().trim();
+
+        if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
+            // alert("worker disponible for confirence room !!!")
+            const showConfirence = document.createElement("div");
+
+            showConfirence.innerHTML = `
+            <div class="flex justify-around items-center gap-4 mt-3 bg-amber-200 shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer">
+                <img 
+                        src="${infoWorker[i].imagE}" 
+                        class="w-8 h-8 object-cover rounded-xl border"
+                    />
+                    <div class="grid gap-1">
+                        <h5 class="text-[8px] font-semibold text-gray-800">NOM : 
+                            <span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
+                        </h5> 
+
+                        <h5 class="text-[8px] font-semibold text-red-800">ROLE : 
+                            <span class="font-normal text-gray-600">${infoWorker[i].role}</span>
+                        </h5>
+                    </div>
+            </div>`;
+
+            const divRoomConfi = document.querySelector("#salle-conference");
+
+            divRoomConfi.appendChild(showConfirence);
+        }
+    }
+})
+
+roombtnServeurs.addEventListener('click', () => {
+    for (let i = 0; i < infoWorker.length; i++) {
+        const role = infoWorker[i].role.toLowerCase().trim();
+
+        if (role == "it" || role == "manager" || role == "nettoyage") {
+            // alert("worker disponible for serveurs room !!!")
+            const showServeurs = document.createElement("div");
+
+            showServeurs.innerHTML = `
+            <div class="flex justify-around items-center gap-4 mt-3 bg-amber-200 shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer">
+                <img 
+                        src="${infoWorker[i].imagE}" 
+                        class="w-8 h-8 object-cover rounded-xl border"
+                    />
+                    <div class="grid gap-1">
+                        <h5 class="text-[8px] font-semibold text-gray-800">NOM : 
+                            <span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
+                        </h5> 
+
+                        <h5 class="text-[8px] font-semibold text-red-800">ROLE : 
+                            <span class="font-normal text-gray-600">${infoWorker[i].role}</span>
+                        </h5>
+                    </div>
+            </div>`;
+
+            const divRoomServeur = document.querySelector("#salle-serveurs");
+
+            divRoomServeur.appendChild(showServeurs);
+        }
+    }
+})
+
+roombtnSecurite.addEventListener('click', () => {
+    for (let i = 0; i < infoWorker.length; i++) {
+        const role = infoWorker[i].role.toLowerCase().trim();
+
+        if (role == "manager" || role == "securite" || role == "nettoyage") {
+            alert("worker disponible for securite room !!!")
+            break;
+        }
+    }
+})
+
+roombtnReseption.addEventListener('click', () => {
+    for (let i = 0; i < infoWorker.length; i++) {
+        const role = infoWorker[i].role.toLowerCase().trim();
+
+        if (role == "manager" || role == "nettoyage" || role == "reseption") {
+            alert("worker disponible for reseption room !!!")
+            break;
+        }
+    }
+})
+
+roombtnPersonnel.addEventListener('click', () => {
+    for (let i = 0; i < infoWorker.length; i++) {
+        const role = infoWorker[i].role.toLowerCase().trim();
+
+        if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
+            alert("worker disponible for staff room !!!")
+            break;
+        }
+    }
+})
+
+roombtnArchives.addEventListener('click', () => {
+    for (let i = 0; i < infoWorker.length; i++) {
+        const role = infoWorker[i].role.toLowerCase().trim();
+
+        if (role == "manager") {
+            alert("worker disponible for archive room !!!")
+            break;
+        }
+    }
+})
