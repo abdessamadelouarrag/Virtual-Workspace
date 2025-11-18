@@ -13,36 +13,36 @@
 <body>
     <main>
 
-        <section class="workspace m-[30px] gap-[20px]">
-            <div class="all-element-workspace grid gap-[20px] sm:flex lg:flex md:flex">
-                <div class="image-global border-[2px] border-white rounded-2xl overflow-hidden flex">
+        <section class="workspace m-[30px] gap-5">
+            <div class="all-element-workspace grid gap-5 sm:flex lg:flex md:flex">
+                <div class="image-global border-2 border-white rounded-2xl overflow-hidden flex">
                     <div class="all-roomes border w-full">
-                        <div class="box1 flex items-center justify-center border-[2px] border-red-300">
-                            <button type="button" class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div class="box1 flex items-center justify-center border-2 border-red-300 hover:bg-green-600/30" id="salle-conference">
+                            <button type="button" class="btn-add flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
                         </div>
-                        <div class="box2 flex items-center justify-center border-[2px] border-red-200">
-                            <button type="button" class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div class="box2 flex items-center justify-center border-2 border-red-200 hover:bg-green-600/30" id="salle-serveurs">
+                            <button type="button" class="btn-add flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
                         </div>
-                        <div class="box3 bg-red-600/30 border-[2px] border-blue-200">
-                            <button type="button" class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div class="box3 bg-red-600/30 border-2 border-blue-200 hover:bg-red-600/60" id="salle-securite">
+                            <button type="button" class="btn-add flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
                         </div>
-                        <div class="box4 bg-red-600/30 border-[2px] border-blue-200">
-                            <button type="button" class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div class="box4 bg-red-600/30 border-2 border-blue-200 hover:bg-red-600/60" id="salle-reseption">
+                            <button type="button" class="btn-add flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
                         </div>
-                        <div class="box5 border-[2px] border-blue-200">
-                            <button type="button" class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div class="box5 border-2 border-blue-200 hover:bg-green-600/30" id="salle-personnel">
+                            <button type="button" class="btn-add flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
                         </div>
-                        <div class="box6 bg-red-600/30 border-[2px] border-blue-200">
-                            <button type="button" class="flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div class="box6 bg-red-600/30 border-2 border-blue-200 hover:bg-red-600/60" id="salle-archives">
+                            <button type="button" class="btn-add flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow hover:bg-green-500"><i class="fas fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
                 <div
-                    class="bord-create p-[10px] rounded-[10px] bg-blue-100/10 text-center border-[3px] border-white w-full sm:w-[25%]">
-                    <h1 class="font-bold text-[40px] pb-5 text-white">WORK SPACE</h1>
-                    <button id="add-new-worker" class="pointer text-white bg-[#1301b6] p-2 rounded-xl font-bold">Add New
+                    class="bord-create p-2.5 rounded-[10px] bg-blue-100/10 text-center border-[3px] border-white w-full sm:w-[25%]">
+                    <h1 class="font-bold text-[20px] pb-5 text-white lg:text-[40px]">WORK SPACE</h1>
+                    <button id="add-new-worker" class="pointer text-white bg-[#1301b6] p-2 rounded-xl font-bold text-[10px] lg:text-[20px]">Add New
                         Worker</button>
-                    <div class="place-workers border mt-3 p-1 lg:h-96 sm:h-48 overflow-y-scroll [scrollbar-width:none]">
+                    <div class="place-workers border mt-3 p-1 h-[70vh] sm:h-[59vh] lg:h-[380px] overflow-y-scroll [scrollbar-width:none]">
                     </div>
                 </div>
             </div>
@@ -101,19 +101,13 @@
                         class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300"
                         id="role-worker">
                         <option value="">-- Choisir un poste --</option>
-                        <option value="it">IT Guy</option>
-                        <option value="server">Server Man</option>
-                        <option value="security">Security</option>
+                        <option value="it">Techniciens IT</option>
+                        <option value="manager">Manager</option>
+                        <option value="securite">Agents de securite</option>
                         <option value="nettoyage">Nettoyage</option>
+                        <option value="reseption">Receptionnistes</option>
+                        <option value="autres">Autres roles</option>
                     </select>
-                </label>
-
-
-                <label class="flex flex-col mt-4">
-                    <span class="text-sm font-medium mb-2">Description</span>
-                    <textarea name="description" rows="3" placeholder="Décrire le rôle ou remarques..."
-                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300"
-                        id="description-worker"></textarea>
                 </label>
 
                 <section class="form-experience">

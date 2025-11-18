@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 *{
     padding: 0;
     margin: 0;
@@ -8,7 +10,7 @@ body{
 }
 
 .image-global{
-    background: url(/plan-69159a65c5684763515973.jpg);
+    background: url(/images/plan-69159a65c5684763515973.jpg);
     width: 80vw;
     height: 90vh;
     background-repeat: no-repeat;

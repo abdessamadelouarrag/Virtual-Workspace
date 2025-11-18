@@ -44,8 +44,13 @@ const formExperience = document.querySelector(".form-experience");
 
 //btn for add experience 
 btnExperience.addEventListener('click', () => {
-    console.log(formExperience)
-    formExperience.innerHTML += `<div class="form-exper bg-blue-900/10 border-[2px] rounded-2xl p-3 mt-6">
+    // console.log(formExperience)
+
+    const newExp = document.createElement("div");
+
+    newExp.className = "form-new-exp"
+
+    newExp.innerHTML = `<div class="form-exper bg-blue-900/10 border-2 rounded-2xl p-3 mt-6">
                         <div class="flex justify-between">
                             <h1 class="text-2xl font-semibold mb-6">Ajouter une Expérience</h1>
                             <button class="btn-supp-exp text-red-600 uppercase font-bold" type="button">supprimer</button>
@@ -80,6 +85,8 @@ btnExperience.addEventListener('click', () => {
                         </label>
                     </div>`
 
+    formExperience.append(newExp);
+
     //part for delet form of experience 
     let supBtns = document.querySelectorAll('.btn-supp-exp')
     supBtns.forEach((btn) => {
@@ -105,7 +112,7 @@ subForm.addEventListener('click', (e) => {
     e.preventDefault();
 
     const nomRegex = /^[A-Za-z]{3,}$/;
-    const prenomRegex =  /^[A-Za-z]{3,}$/;
+    const prenomRegex = /^[A-Za-z]{3,}$/;
     const roleRegex = /^[A-Za-z\s]{2,}$/;
     const emailRegex = /^[\w.-]+@[\w.-]+\.\w+$/;
     const imageurlRegex = /^https?:\/\//;
@@ -116,19 +123,19 @@ subForm.addEventListener('click', (e) => {
     const role = roleWorker.value.trim();
     const imagE = imageWorker.value.trim();
 
-    if(!nomRegex.test(nom)){
+    if (!nomRegex.test(nom)) {
         alert("invalide nom !!!")
         return;
     }
-    if(!prenomRegex.test(prenom)){
+    if (!prenomRegex.test(prenom)) {
         alert("invalide prenom !!!")
         return;
     }
-    if(!emailRegex.test(email)){
+    if (!emailRegex.test(email)) {
         alert("email invalide !!!");
         return;
     }
-    if(!imageurlRegex.test(imagE)){
+    if (!imageurlRegex.test(imagE)) {
         alert("invalide url image !!!");
         return;
     }
@@ -147,7 +154,7 @@ subForm.addEventListener('click', (e) => {
     });
 
 
-     if(!roleRegex.test(role)){
+    if (!roleRegex.test(role)) {
         alert("invalide role !!!");
         return;
     }
@@ -162,16 +169,18 @@ subForm.addEventListener('click', (e) => {
     }
 
     infoWorker.push(workers);
+    // console.log(infoWorker);
+    // console.log(infoWorker[0])
 
     const newDiv = document.createElement('div');
 
     newDiv.className =
-        "newOne flex items-center gap-4 mt-3 bg-white shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer hover:bg-blue-100/90";
+        "newOne flex justify-around items-center gap-4 mt-3 bg-white shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer hover:bg-blue-100/90";
 
     newDiv.innerHTML = `
    <img 
      src="${workers.imagE}" 
-     class="w-[40px] h-[40px] object-cover rounded-xl border"
+     class="w-10 h-10 object-cover rounded-xl border"
    />
    <div class="grid gap-1">
       <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
@@ -195,7 +204,7 @@ subForm.addEventListener('click', (e) => {
             expPart += `
             <br>
              <h3 class="col-span-4 text-center font-bold text-black text-lg uppercase mt-4">Expériences</h3>
-        <div class="expCard border-2 border-green-300 flex flex-wrap bg-green-50 rounded-xl p-4 shadow-md">
+        <div class="expCard border-2 border-green-300 flex flex-wrap bg-green-50 rounded-xl p-4 shadow-lg">
             <div class="experience text-sm mt-3">
                 <p><span class="font-semibold">Poste :</span> ${exp.poste}</p>
                 <p><span class="font-semibold">Startup :</span> ${exp.startup}</p>
@@ -208,16 +217,16 @@ subForm.addEventListener('click', (e) => {
 
 
         infoPopup.innerHTML = `
-    <div class="all-info-popup bg-white w-full max-w-lg rounded-2xl shadow-xl p-4 h-[60vh] overflow-scroll [scrollbar-width:none]">
+    <div class="all-info-popup bg-white w-full max-w-lg rounded-2xl shadow-xl p-4 h-[60vh] overflow-scroll [scrollbar-width:none] border-4 border-black/30">
 
         <div class="grid grid-cols-[1fr 2fr] gap-5 p-5">
 
-            <img src="${workers.imagE}" 
-                 alt="Worker image" 
-                 class="w-28 h-28 object-cover rounded-xl shadow-md">
+            <img src="${workers.imagE}" alt="Worker image" class="w-28 h-28 object-cover rounded-xl shadow-md border-amber-300/50 border-4">
 
-            <div class="infos gap-2 text-blue-700 text-sm border-[5px] h-[150px] p-3 col-span-1 rounded-xl">
-                <h3 class="font-bold text-black text-center">INFO GLOBAL</h3>
+            <div class="infos gap-2 text-blue-700 text-sm border-[5px] h-[150px] p-3 col-span-1 rounded-xl shadow-lg">
+                <div class="border-b-2 border-blue-100 mb-3">
+                    <h3 class="font-bold text-black text-center"><i class="fas fa-person"></i> INFO GLOBAL</h3>
+                </div>
                 <h5><span class="font-semibold">Nom :</span> ${workers.nom}</h5>
                 <h5><span class="font-semibold">Prénom :</span> ${workers.prenom}</h5>
                 <h5><span class="font-semibold">Rôle :</span> ${workers.role}</h5>
@@ -250,7 +259,41 @@ subForm.addEventListener('click', (e) => {
     imagePreview.src = '';
     imagePreview.classList.add("hidden");
     placeholderText.classList.remove("hidden")
+
+
+
+    const roomS = document.querySelectorAll(".btn-add");
+    const roomSecurity = document.querySelector("#salle-securite")
+
+
+    roomS.forEach((room) => {
+
+        room.addEventListener('click', () => {
+            // let kayn = false;
+            for (let i = 0; i < infoWorker.length; i++) {
+                if (infoWorker[i].role === "securite") {
+
+                    const roomWorker = document.createElement("div");
+
+                    roomWorker.className = "room-here"
+                    roomWorker.innerHTML = `
+                    <div class="grid grid-cols-3 place-self-center bg-amber-300 rounded-2xl mb-3">
+                        <button class="btn-delet-worker"><i class="fas fa-x text-[5px]"></i></button>
+                        <img src="${workers.imagE}" alt="" class="w-8 h-8 object-cover rounded-3xl p-1">
+                    </div>`
+                    roomSecurity.append(roomWorker)
+                    bordCreate.innerHTML = ``;
+                    break;
+                }
+                const bntRemove = document.querySelector(".btn-delet-worker");
+
+                bntRemove.addEventListener('click' , () => {
+                    // const test = document.querySelector(".room-here");
+                    .remove();
+                })
+            }
+        })
+    })
 })
 
-
-
+// })
