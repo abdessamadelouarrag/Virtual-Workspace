@@ -269,7 +269,6 @@ subForm.addEventListener('click', (e) => {
     roomS.forEach((room) => {
 
         room.addEventListener('click', () => {
-            // let kayn = false;
             for (let i = 0; i < infoWorker.length; i++) {
                 if (infoWorker[i].role === "securite") {
 
@@ -285,15 +284,16 @@ subForm.addEventListener('click', (e) => {
                     bordCreate.innerHTML = ``;
                     break;
                 }
-                const bntRemove = document.querySelector(".btn-delet-worker");
-
-                bntRemove.addEventListener('click' , () => {
-                    // const test = document.querySelector(".room-here");
-                    .remove();
-                })
             }
         })
     })
+
+    const deletRom = document.querySelector(".btn-delet-worker");
+    const newRomm = document.querySelector(".room-here");
+
+    deletRom.addEventListener('click', () => {
+        newRomm.remove();
+    } )
 })
 
 // })
