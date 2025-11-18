@@ -284,20 +284,11 @@ roombtnConfirence.addEventListener('click', () => {
             const showConfirence = document.createElement("div");
 
             showConfirence.innerHTML = `
-            <div class="flex justify-around items-center gap-4 mt-3 bg-amber-200 shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer">
+            <div class="cursor-pointer">
                 <img 
                         src="${infoWorker[i].imagE}" 
-                        class="w-8 h-8 object-cover rounded-xl border"
+                        class="w-12 h-12 object-cover rounded-full border"
                     />
-                    <div class="grid gap-1">
-                        <h5 class="text-[8px] font-semibold text-gray-800">NOM : 
-                            <span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
-                        </h5> 
-
-                        <h5 class="text-[8px] font-semibold text-red-800">ROLE : 
-                            <span class="font-normal text-gray-600">${infoWorker[i].role}</span>
-                        </h5>
-                    </div>
             </div>`;
 
             const divRoomConfi = document.querySelector("#salle-conference");
@@ -316,20 +307,11 @@ roombtnServeurs.addEventListener('click', () => {
             const showServeurs = document.createElement("div");
 
             showServeurs.innerHTML = `
-            <div class="flex justify-around items-center gap-4 mt-3 bg-amber-200 shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer">
+            <div class="cursor-pointer">
                 <img 
                         src="${infoWorker[i].imagE}" 
-                        class="w-8 h-8 object-cover rounded-xl border"
+                        class="w-9 h-9 object-cover rounded-full border"
                     />
-                    <div class="grid gap-1">
-                        <h5 class="text-[8px] font-semibold text-gray-800">NOM : 
-                            <span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
-                        </h5> 
-
-                        <h5 class="text-[8px] font-semibold text-red-800">ROLE : 
-                            <span class="font-normal text-gray-600">${infoWorker[i].role}</span>
-                        </h5>
-                    </div>
             </div>`;
 
             const divRoomServeur = document.querySelector("#salle-serveurs");
