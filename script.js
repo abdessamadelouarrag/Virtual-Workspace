@@ -146,6 +146,7 @@ subForm.addEventListener('click', (e) => {
     }
 
     let experienceWorker = [];
+    // console.log(experienceWorker);
 
     const formExperiences = document.querySelectorAll(".form-exper");
 
@@ -200,6 +201,7 @@ subForm.addEventListener('click', (e) => {
 
 
     bordCreate.append(newDiv);
+
     newDiv.addEventListener('click', () => {
         const infoPopup = document.createElement("div");
 
@@ -281,19 +283,37 @@ roombtnConfirence.addEventListener('click', () => {
 
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
             // alert("worker disponible for confirence room !!!")
-            const showConfirence = document.createElement("div");
+            let showConfirence = ``;
 
-            showConfirence.innerHTML = `
-            <div class="cursor-pointer">
-                <img 
-                        src="${infoWorker[i].imagE}" 
-                        class="w-12 h-12 object-cover rounded-full border"
-                    />
-            </div>`;
+            
+            showConfirence += `
+        <div class="gap-5 p-5 bg-amber-200 grid grid-cols-2">
+            <img src="${infoWorker[i].imagE}" class="w-10 h-10 object-cover rounded-xl border"/>
+            <div class="grid gap-1">
+                <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
+                    <span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
+                </h5> 
+                <h5 class="text-[12px] font-semibold text-red-800">ROLE : 
+                    <span class="font-normal text-gray-600">${infoWorker[i].role}</span>
+                </h5>
+            </div>
+        </div>
+            `;
 
-            const divRoomConfi = document.querySelector("#salle-conference");
+            const tesOne = document.createElement("div");
+            tesOne.className = "w-56 bg-amber-300"
+            tesOne.innerHTML = `
+                <div>
+                    ${showConfirence}
+                </div>`
+            const showWorkers = document.querySelector(".workers");
+            const sectionWorkers = document.querySelector(".section-workers")
+            sectionWorkers.classList.remove("hidden");
+            showWorkers.append(tesOne);
 
-            divRoomConfi.appendChild(showConfirence);
+            // const divRoomConfi = document.querySelector("#salle-conference");
+
+            // divRoomConfi.appendChild(showConfirence);
         }
     }
 })
