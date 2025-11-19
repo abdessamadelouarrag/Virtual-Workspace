@@ -264,7 +264,43 @@ const roombtnReseption = document.querySelector(".btn-add-reseption");
 const roombtnPersonnel = document.querySelector(".btn-add-personnel");
 const roombtnArchives = document.querySelector(".btn-add-archives");
 
+//function to show workers in his roomes
+function ShowInRoom(infoWorker, i){
+    // let showWorker = ``;
+            const showWorkers = document.querySelector(".workers");
 
+            let showWorker = `
+                <div class="flex items-center gap-4 p-4 bg-white shadow-md rounded-2xl border border-gray-200 hover:shadow-lg transition">
+                <img src="${infoWorker[i].imagE}" 
+                    class="w-14 h-14 object-cover rounded-xl border border-gray-300">
+
+                <div class="flex flex-col gap-1">
+                    <h5 class="text-[13px] font-semibold text-gray-700">NOM :<span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
+                    </h5>
+                    <h5 class="text-[13px] font-semibold text-blue-600">ROLE :<span class="font-normal text-gray-600">${infoWorker[i].role}</span>
+                    </h5>
+                </div>
+            </div>
+
+            `;
+
+            const tesOne = document.createElement("div");
+            tesOne.className = "w-56 place-self-center"
+            tesOne.innerHTML = `
+                <div class="m-2">
+                    ${showWorker}
+                </div>`
+            const sectionWorkers = document.querySelector(".section-workers")
+            sectionWorkers.classList.remove("hidden");
+            showWorkers.append(tesOne);
+
+            //btn close show workers
+            const iconeCloseShow = document.querySelector("#close-showworkers")
+
+            iconeCloseShow.addEventListener('click', () => {
+                sectionWorkers.classList.add("hidden");
+            })
+}
 
 roombtnConfirence.addEventListener('click', () => {
 
@@ -275,41 +311,12 @@ roombtnConfirence.addEventListener('click', () => {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
-            let showWorker = ``;
-   
-            showWorker += `
-                <div class="gap-5 p-5 bg-blue-500 grid grid-cols-2 rounded-2xl">
-                    <img src="${infoWorker[i].imagE}" class="w-10 h-10 object-cover rounded-xl border"/>
-                    <div class="grid gap-1">
-                        <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
-                            <span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
-                        </h5> 
-                        <h5 class="text-[12px] font-semibold text-red-800">ROLE : 
-                            <span class="font-normal text-gray-600">${infoWorker[i].role}</span>
-                        </h5>
-                    </div>
-                </div>
-            `;
-
-            const tesOne = document.createElement("div");
-            tesOne.className = "w-56 bg-amber-300 place-self-center"
-            tesOne.innerHTML = `
-                <div>
-                    ${showWorker}
-                </div>`
-            const sectionWorkers = document.querySelector(".section-workers")
-            sectionWorkers.classList.remove("hidden");
-            showWorkers.append(tesOne);
-
-            //btn close show workers
-            const iconeCloseShow = document.querySelector("#close-showworkers")
-
-            iconeCloseShow.addEventListener('click', () => {
-                sectionWorkers.classList.add("hidden");
-            })
+            ShowInRoom(infoWorker, i);
         }
     }
 })
+
+
 
 roombtnServeurs.addEventListener('click', () => {
 
@@ -319,83 +326,64 @@ roombtnServeurs.addEventListener('click', () => {
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
-        if (role == "it" || role == "manager") {
-            let showWorker = ``;
-   
-            showWorker += `
-                <div class="gap-5 p-5 bg-blue-500 grid grid-cols-2 rounded-2xl">
-                    <img src="${infoWorker[i].imagE}" class="w-10 h-10 object-cover rounded-xl border"/>
-                    <div class="grid gap-1">
-                        <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
-                            <span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
-                        </h5> 
-                        <h5 class="text-[12px] font-semibold text-red-800">ROLE : 
-                            <span class="font-normal text-gray-600">${infoWorker[i].role}</span>
-                        </h5>
-                    </div>
-                </div>
-            `;
-
-            const tesOne = document.createElement("div");
-            tesOne.className = "w-56 bg-amber-300 place-self-center"
-            tesOne.innerHTML = `
-                <div>
-                    ${showWorker}
-                </div>`
-            const sectionWorkers = document.querySelector(".section-workers")
-            sectionWorkers.classList.remove("hidden");
-            showWorkers.append(tesOne);
-
-            //btn close show workers
-            const iconeCloseShow = document.querySelector("#close-showworkers")
-
-            iconeCloseShow.addEventListener('click', () => {
-                sectionWorkers.classList.add("hidden");
-            })
+        if (role == "it" || role == "manager" || role == "nettoyage") {
+            ShowInRoom(infoWorker, i);
         }
     }
 })
 
 roombtnSecurite.addEventListener('click', () => {
+
+    const showWorkers = document.querySelector(".workers");
+    showWorkers.innerHTML = '';
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "manager" || role == "securite" || role == "nettoyage") {
-            alert("worker disponible for securite room !!!")
-            break;
+            ShowInRoom(infoWorker, i);
         }
     }
 })
 
 roombtnReseption.addEventListener('click', () => {
+
+    const showWorkers = document.querySelector(".workers");
+    showWorkers.innerHTML = '';
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "manager" || role == "nettoyage" || role == "reseption") {
-            alert("worker disponible for reseption room !!!")
-            break;
+            ShowInRoom(infoWorker, i);
         }
     }
 })
 
 roombtnPersonnel.addEventListener('click', () => {
+
+    const showWorkers = document.querySelector(".workers");
+    showWorkers.innerHTML = '';
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
-            alert("worker disponible for staff room !!!")
-            break;
+            ShowInRoom(infoWorker, i);
         }
     }
 })
 
 roombtnArchives.addEventListener('click', () => {
+
+    const showWorkers = document.querySelector(".workers");
+    showWorkers.innerHTML = '';
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "manager") {
-            alert("worker disponible for archive room !!!")
-            break;
+            ShowInRoom(infoWorker, i);
         }
     }
 })
