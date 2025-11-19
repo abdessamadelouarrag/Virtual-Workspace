@@ -271,7 +271,7 @@ function ShowInRoom(infoWorker, i){
 
             let showWorker = `
                 <div class="flex items-center gap-4 p-4 bg-white shadow-md rounded-2xl border m-2 border-gray-200 hover:shadow-lg transition">
-                <button class=" bg-green-600 text-[8px] rounded-2xl p-2">ADD</button>
+                <button class="btn-add-to-room bg-green-600 text-[8px] rounded-2xl p-2">ADD</button>
                 <img src="${infoWorker[i].imagE}" 
                     class="w-14 h-14 object-cover rounded-xl border border-gray-300">
 
@@ -301,6 +301,16 @@ function ShowInRoom(infoWorker, i){
             iconeCloseShow.addEventListener('click', () => {
                 sectionWorkers.classList.add("hidden");
             })
+}
+
+function addToRoom(){
+    const btnAddToRoom = document.querySelector(".btn-add-to-room");
+    btnAddToRoom.addEventListener('click', () => {
+        let stockWorkerRoom = [];
+
+        stockWorkerRoom.push()
+
+    })
 }
 
 roombtnConfirence.addEventListener('click', () => {
