@@ -274,9 +274,36 @@ const roombtnReseption = document.querySelector(".btn-add-reseption");
 const roombtnPersonnel = document.querySelector(".btn-add-personnel");
 const roombtnArchives = document.querySelector(".btn-add-archives");
 
+//function add to room workers
+function addToRoom(infoWorker,i){ 
+    
+    const btnAddToRoom = document.querySelector(".btn-add-to-room");
+
+     btnAddToRoom.addEventListener('click', () => { 
+
+        let stockWorkerRoom = []; 
+
+        stockWorkerRoom.push(infoWorker[i]) 
+
+        console.log(stockWorkerRoom); 
+
+        const roomSecurite = document.createElement("div");
+
+         roomSecurite.innerHTML = `
+         <div class="new-div-room flex">
+          <img src="${stockWorkerRoom[i].imagE}" alt="image-room"
+           <div class="info-room">
+            <h5>${stockWorkerRoom[i].nom}</h5>
+            <h5>${stockWorkerRoom[i].role}</h5>
+         </div>
+        </div>` 
+        const roomFist = document.getElementById("salle-conference"); 
+        roomSecurite.appendChild(roomFist); 
+    }) 
+}
+
 //function to show workers in his roomes
-function ShowInRoom(infoWorker, i){
-    // let showWorker = ``;
+function ShowInRoom(infoWorker, i, container){
             const showWorkers = document.querySelector(".workers");
 
             let showWorker = `
@@ -292,7 +319,6 @@ function ShowInRoom(infoWorker, i){
                     </h5>
                 </div>
             </div>
-
             `;
 
             const tesOne = document.createElement("div");
@@ -311,28 +337,11 @@ function ShowInRoom(infoWorker, i){
             iconeCloseShow.addEventListener('click', () => {
                 sectionWorkers.classList.add("hidden");
             })
-}
-//function add to room workers
-function addToRoom(infoWorker,i){
-    const btnAddToRoom = document.querySelector(".btn-add-to-room");
-    btnAddToRoom.addEventListener('click', () => {
-        let stockWorkerRoom = [];
-        stockWorkerRoom.push(infoWorker[i])
-        console.log(stockWorkerRoom);
 
-        const roomSecurite = document.createElement("div");
-        roomSecurite.innerHTML = `
-        <div class="new-div-room flex">
-            <img src="${stockWorkerRoom[i].imagE}" alt="image-room"
-            <div class="info-room">
-                <h5>${stockWorkerRoom[i].nom}</h5>
-                <h5>${stockWorkerRoom[i].role}</h5>
-            </div>
-        </div>`
-
-        const roomFist = document.getElementById("salle-conference");
-        roomSecurite.appendChild(roomFist);
-    })
+            tesOne.querySelector(".btn-add-to-room").addEventListener('click', () => {
+                container.append(function cardinroom, id);
+                //lcard in room function kan3tiwha id o katrJ3 lina div dyal lkart li ghadi n7to f room m9ada 3la 7sab dak id li 3Tanaha
+            })
 }
 //btn to show all can enter room confirence
 roombtnConfirence.addEventListener('click', () => {
@@ -344,7 +353,7 @@ roombtnConfirence.addEventListener('click', () => {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
-            ShowInRoom(infoWorker, i);
+            ShowInRoom(infoWorker, i, confirenceContainer)
         }
     }
 })
