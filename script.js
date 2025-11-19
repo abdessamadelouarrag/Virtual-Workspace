@@ -270,7 +270,8 @@ function ShowInRoom(infoWorker, i){
             const showWorkers = document.querySelector(".workers");
 
             let showWorker = `
-                <div class="flex items-center gap-4 p-4 bg-white shadow-md rounded-2xl border border-gray-200 hover:shadow-lg transition">
+                <div class="flex items-center gap-4 p-4 bg-white shadow-md rounded-2xl border m-2 border-gray-200 hover:shadow-lg transition">
+                <button class=" bg-green-600 text-[8px] rounded-2xl p-2">ADD</button>
                 <img src="${infoWorker[i].imagE}" 
                     class="w-14 h-14 object-cover rounded-xl border border-gray-300">
 
@@ -285,7 +286,7 @@ function ShowInRoom(infoWorker, i){
             `;
 
             const tesOne = document.createElement("div");
-            tesOne.className = "w-56 place-self-center"
+            tesOne.className = "w-full place-self-center"
             tesOne.innerHTML = `
                 <div class="m-2">
                     ${showWorker}
@@ -313,10 +314,11 @@ roombtnConfirence.addEventListener('click', () => {
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
             ShowInRoom(infoWorker, i);
         }
+        else{
+            alert("no one avaliable to this room");
+        }
     }
 })
-
-
 
 roombtnServeurs.addEventListener('click', () => {
 
