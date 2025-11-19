@@ -66,20 +66,14 @@ btnExperience.addEventListener('click', () => {
                         </label>
     
                         <label class="flex flex-col mt-4">
-                            <span class="text-sm font-medium mb-2">Nom de la Startup / Entreprise</span>
-                            <input name="startup" type="text" required placeholder="Ex : TechWave Solutions"
-                                class="startup-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
-                        </label>
-    
-                        <label class="flex flex-col mt-4">
                             <span class="text-sm font-medium mb-2">Date de début</span>
-                            <input name="date_debut" type="date" required
+                            <input name="date_debut" type="date" id="date-start" required
                                 class="datestar-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
                         </label>
     
                         <label class="flex flex-col mt-4">
                             <span class="text-sm font-medium mb-2">Date de fin</span>
-                            <input name="date_fin" type="date"
+                            <input name="date_fin" type="date" id="date-end"
                                 class="dateend-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
                         </label>
                     </div>`
@@ -143,12 +137,18 @@ subForm.addEventListener('click', (e) => {
     const formExperiences = document.querySelectorAll(".form-exper");
 
     formExperiences.forEach(expDiv => {
-        const poste = expDiv.querySelector('input[name="poste"]').value;
-        const startup = expDiv.querySelector('input[name="startup"]').value;
-        const dateStartExp = expDiv.querySelector('input[name="date_debut"]').value;
-        const dateEndExp = expDiv.querySelector('input[name="date_fin"]').value;
+        const poste = expDiv.querySelector(".post-exp").value;
+        const dateStartExp = expDiv.querySelector("#date-start").value;
+        const dateEndExp = expDiv.querySelector("#date-end").value;
 
-        experienceWorker.push({ poste, startup, dateStartExp, dateEndExp });
+        if(dateStartExp > dateEndExp){
+            alert("errrrrrrrrrrrrrr!!!!")
+            dateStartExp.value = "";
+            dateStartExp.focus();
+            return;
+        }
+
+        experienceWorker.push({ poste, dateStartExp, dateEndExp });
     });
 
 
@@ -203,7 +203,6 @@ subForm.addEventListener('click', (e) => {
         <div class="expCard border-2 border-green-300 flex flex-wrap bg-green-50 rounded-xl p-4 shadow-lg">
             <div class="experience text-sm mt-3">
                 <p><span class="font-semibold">Poste :</span> ${exp.poste}</p>
-                <p><span class="font-semibold">Startup :</span> ${exp.startup}</p>
                 <p><span class="font-semibold">Début :</span> ${exp.dateStartExp}</p>
                 <p><span class="font-semibold">Fin :</span> ${exp.dateEndExp}</p>
             </div>
@@ -303,13 +302,25 @@ function ShowInRoom(infoWorker, i){
             })
 }
 
-function addToRoom(){
+function addToRoom(infoWorker,i){
     const btnAddToRoom = document.querySelector(".btn-add-to-room");
     btnAddToRoom.addEventListener('click', () => {
         let stockWorkerRoom = [];
+        stockWorkerRoom.push(infoWorker[i])
+        console.log(stockWorkerRoom);
 
-        stockWorkerRoom.push()
+        const roomSecurite = document.createElement("div");
+        roomSecurite.innerHTML = `
+        <div class="new-div-room flex">
+            <img src="${stockWorkerRoom[i].imagE}" alt="image-room"
+            <div class="info-room">
+                <h5>${stockWorkerRoom[i].nom}</h5>
+                <h5>${stockWorkerRoom[i].role}</h5>
+            </div>
+        </div>`
 
+        const roomFist = document.getElementById("salle-conference");
+        roomSecurite.appendChild(roomFist);
     })
 }
 
@@ -327,6 +338,7 @@ roombtnConfirence.addEventListener('click', () => {
         else{
             alert("no one avaliable to this room");
         }
+        addToRoom(infoWorker,i);
     }
 })
 
