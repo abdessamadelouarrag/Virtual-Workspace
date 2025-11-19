@@ -13,7 +13,6 @@ btnAdd.addEventListener('click', () => {
     sectionForm.classList.remove("hidden")
 })
 
-
 //for close form if i click in body with out this form
 document.body.addEventListener('click', (e) => {
     if (e.target === sectionForm) {
@@ -30,7 +29,6 @@ function closeForm() {
     imagePreview.classList.add("hidden");
     placeholderText.classList.remove("hidden");
 }
-
 
 //for show url image in image preview
 imageUrl.addEventListener('input', () => {
@@ -50,7 +48,6 @@ imageUrl.addEventListener('input', () => {
 
 //btn for add experience 
 btnExperience.addEventListener('click', () => {
-    // console.log(formExperience)
 
     const newExp = document.createElement("div");
 
@@ -62,13 +59,11 @@ btnExperience.addEventListener('click', () => {
                             <button class="btn-supp-exp text-red-600 uppercase font-bold" type="button">supprimer</button>
                         </div>
     
-    
                         <label class="flex flex-col mt-2">
                             <span class="text-sm font-medium mb-2">Poste occupé</span>
                             <input name="poste" type="text" required placeholder="Ex : Développeur IT"
                                 class="post-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
                         </label>
-    
     
                         <label class="flex flex-col mt-4">
                             <span class="text-sm font-medium mb-2">Nom de la Startup / Entreprise</span>
@@ -76,13 +71,11 @@ btnExperience.addEventListener('click', () => {
                                 class="startup-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
                         </label>
     
-    
                         <label class="flex flex-col mt-4">
                             <span class="text-sm font-medium mb-2">Date de début</span>
                             <input name="date_debut" type="date" required
                                 class="datestar-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
                         </label>
-    
     
                         <label class="flex flex-col mt-4">
                             <span class="text-sm font-medium mb-2">Date de fin</span>
@@ -146,7 +139,6 @@ subForm.addEventListener('click', (e) => {
     }
 
     let experienceWorker = [];
-    // console.log(experienceWorker);
 
     const formExperiences = document.querySelectorAll(".form-exper");
 
@@ -175,8 +167,6 @@ subForm.addEventListener('click', (e) => {
     }
 
     infoWorker.push(workers);
-    // console.log(infoWorker);
-    // console.log(infoWorker[0])
 
     const newDiv = document.createElement('div');
 
@@ -198,7 +188,6 @@ subForm.addEventListener('click', (e) => {
       </h5>
    </div>
 `;
-
 
     bordCreate.append(newDiv);
 
@@ -282,38 +271,39 @@ roombtnConfirence.addEventListener('click', () => {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
-            // alert("worker disponible for confirence room !!!")
-            let showConfirence = ``;
-
-            
-            showConfirence += `
-        <div class="gap-5 p-5 bg-amber-200 grid grid-cols-2">
-            <img src="${infoWorker[i].imagE}" class="w-10 h-10 object-cover rounded-xl border"/>
-            <div class="grid gap-1">
-                <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
-                    <span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
-                </h5> 
-                <h5 class="text-[12px] font-semibold text-red-800">ROLE : 
-                    <span class="font-normal text-gray-600">${infoWorker[i].role}</span>
-                </h5>
-            </div>
-        </div>
+            let showWorker = ``;
+   
+            showWorker += `
+                <div class="gap-5 p-5 bg-blue-500 grid grid-cols-2 rounded-2xl">
+                    <img src="${infoWorker[i].imagE}" class="w-10 h-10 object-cover rounded-xl border"/>
+                    <div class="grid gap-1">
+                        <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
+                            <span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
+                        </h5> 
+                        <h5 class="text-[12px] font-semibold text-red-800">ROLE : 
+                            <span class="font-normal text-gray-600">${infoWorker[i].role}</span>
+                        </h5>
+                    </div>
+                </div>
             `;
 
             const tesOne = document.createElement("div");
-            tesOne.className = "w-56 bg-amber-300"
+            tesOne.className = "w-56 bg-amber-300 place-self-center"
             tesOne.innerHTML = `
                 <div>
-                    ${showConfirence}
+                    ${showWorker}
                 </div>`
             const showWorkers = document.querySelector(".workers");
             const sectionWorkers = document.querySelector(".section-workers")
             sectionWorkers.classList.remove("hidden");
             showWorkers.append(tesOne);
 
-            // const divRoomConfi = document.querySelector("#salle-conference");
+            //btn close show workers
+            const iconeCloseShow = document.querySelector("#close-showworkers")
 
-            // divRoomConfi.appendChild(showConfirence);
+            iconeCloseShow.addEventListener('click', () => {
+                sectionWorkers.classList.add("hidden");
+            })
         }
     }
 })
