@@ -46,7 +46,7 @@ imageUrl.addEventListener('input', () => {
     }
 })
 
-//btn for add experience 
+//btn for add experience in popup
 btnExperience.addEventListener('click', () => {
 
     const newExp = document.createElement("div");
@@ -91,7 +91,7 @@ btnExperience.addEventListener('click', () => {
 
 //for stock info workers
 let infoWorker = [];
-
+//all i need to take inputs from the form
 const inputNom = document.querySelector("#nom-worker");
 const inputPrenom = document.querySelector("#prenom-worker");
 const emailWorker = document.querySelector("#email-worker");
@@ -99,22 +99,24 @@ const imageWorker = document.querySelector("#imageUrl");
 const roleWorker = document.querySelector("#role-worker");
 
 //part submit of form
-
 subForm.addEventListener('click', (e) => {
     e.preventDefault();
 
+    //regex for inputs in the form
     const nomRegex = /^[A-Za-z]{3,}$/;
     const prenomRegex = /^[A-Za-z]{3,}$/;
     const roleRegex = /^[A-Za-z\s]{2,}$/;
     const emailRegex = /^[\w.-]+@[\w.-]+\.\w+$/;
     const imageurlRegex = /^https?:\/\//;
 
+    //all inputs in the room
     const nom = inputNom.value.trim();
     const prenom = inputPrenom.value.trim();
     const email = emailWorker.value.trim();
     const role = roleWorker.value.trim();
     const imagE = imageWorker.value.trim();
 
+    //conditions of all regex
     if (!nomRegex.test(nom)) {
         alert("invalide nom !!!")
         return;
@@ -131,7 +133,12 @@ subForm.addEventListener('click', (e) => {
         alert("invalide url image !!!");
         return;
     }
+    if (!roleRegex.test(role)) {
+        alert("invalide role !!!");
+        return;
+    }
 
+    //arrzy for stock experiences of workers
     let experienceWorker = [];
 
     const formExperiences = document.querySelectorAll(".form-exper");
@@ -142,21 +149,17 @@ subForm.addEventListener('click', (e) => {
         const dateEndExp = expDiv.querySelector("#date-end").value;
 
         if(dateStartExp > dateEndExp){
-            alert("errrrrrrrrrrrrrr!!!!")
+            alert("date start is incorrect!!!")
             dateStartExp.value = "";
             dateStartExp.focus();
             return;
         }
 
+        //push all experiences to the array experienceWorker
         experienceWorker.push({ poste, dateStartExp, dateEndExp });
     });
 
-
-    if (!roleRegex.test(role)) {
-        alert("invalide role !!!");
-        return;
-    }
-
+    //for take all info from the form global and form experiences
     const workers = {
         nom,
         prenom,
@@ -166,10 +169,12 @@ subForm.addEventListener('click', (e) => {
         experience: experienceWorker,
     }
 
+    //push the infoss
     infoWorker.push(workers);
 
-    const newDiv = document.createElement('div');
 
+    //part create new div for show info worker in right bar
+    const newDiv = document.createElement('div');
     newDiv.className =
         "newOne flex justify-around items-center gap-4 mt-3 bg-white shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer hover:bg-blue-100/90";
 
@@ -213,7 +218,7 @@ subForm.addEventListener('click', (e) => {
 
         infoPopup.innerHTML = `
     <div class="all-info-popup bg-white w-full max-w-lg rounded-2xl shadow-xl p-4 h-[60vh] overflow-scroll [scrollbar-width:none] border-4 border-black/30">
-
+        <button class="delet-workers"><i class="fas fa-trash-can test-[7px] text-red-600"></i></button>
         <div class="grid grid-cols-[1fr 2fr] gap-5 p-5">
 
             <img src="${workers.imagE}" alt="Worker image" class="w-28 h-28 object-cover rounded-xl shadow-md border-amber-300/50 border-4">
@@ -241,6 +246,12 @@ subForm.addEventListener('click', (e) => {
         sectionPopup.classList.remove("hidden");
         sectionPopup.append(infoPopup);
 
+        const deletWorker = document.querySelector(".delet-workers");
+
+        deletWorker.addEventListener('click', () => {
+            infoWorker.remove();
+        })
+
         document.body.addEventListener('click', (e) => {
             if (e.target === sectionPopup) {
                 sectionPopup.classList.add("hidden");
@@ -255,7 +266,7 @@ subForm.addEventListener('click', (e) => {
     imagePreview.classList.add("hidden");
     placeholderText.classList.remove("hidden")
 })
-
+//all i need to show workers and add in his rooms
 const roombtnConfirence = document.querySelector(".btn-add-conference");
 const roombtnServeurs = document.querySelector(".btn-add-serveurs");
 const roombtnSecurite = document.querySelector(".btn-add-securite");
@@ -301,7 +312,7 @@ function ShowInRoom(infoWorker, i){
                 sectionWorkers.classList.add("hidden");
             })
 }
-
+//function add to room workers
 function addToRoom(infoWorker,i){
     const btnAddToRoom = document.querySelector(".btn-add-to-room");
     btnAddToRoom.addEventListener('click', () => {
@@ -323,7 +334,7 @@ function addToRoom(infoWorker,i){
         roomSecurite.appendChild(roomFist);
     })
 }
-
+//btn to show all can enter room confirence
 roombtnConfirence.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
@@ -335,13 +346,9 @@ roombtnConfirence.addEventListener('click', () => {
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
             ShowInRoom(infoWorker, i);
         }
-        else{
-            alert("no one avaliable to this room");
-        }
-        addToRoom(infoWorker,i);
     }
 })
-
+//btn to show all can enter room serveurs
 roombtnServeurs.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
@@ -355,7 +362,7 @@ roombtnServeurs.addEventListener('click', () => {
         }
     }
 })
-
+//btn to show all can enter room securite
 roombtnSecurite.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
@@ -369,7 +376,7 @@ roombtnSecurite.addEventListener('click', () => {
         }
     }
 })
-
+//btn to show all can enter room reseption
 roombtnReseption.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
@@ -383,7 +390,7 @@ roombtnReseption.addEventListener('click', () => {
         }
     }
 })
-
+//btn to show all can enter room personnel
 roombtnPersonnel.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
@@ -397,7 +404,7 @@ roombtnPersonnel.addEventListener('click', () => {
         }
     }
 })
-
+//btn to show all can enter room archives
 roombtnArchives.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
