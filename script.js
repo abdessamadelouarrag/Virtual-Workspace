@@ -267,6 +267,10 @@ const roombtnArchives = document.querySelector(".btn-add-archives");
 
 
 roombtnConfirence.addEventListener('click', () => {
+
+    const showWorkers = document.querySelector(".workers");
+    showWorkers.innerHTML = '';
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
@@ -293,7 +297,6 @@ roombtnConfirence.addEventListener('click', () => {
                 <div>
                     ${showWorker}
                 </div>`
-            const showWorkers = document.querySelector(".workers");
             const sectionWorkers = document.querySelector(".section-workers")
             sectionWorkers.classList.remove("hidden");
             showWorkers.append(tesOne);
@@ -309,24 +312,46 @@ roombtnConfirence.addEventListener('click', () => {
 })
 
 roombtnServeurs.addEventListener('click', () => {
+
+    const showWorkers = document.querySelector(".workers");
+    showWorkers.innerHTML = '';
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
-        if (role == "it" || role == "manager" || role == "nettoyage") {
-            // alert("worker disponible for serveurs room !!!")
-            const showServeurs = document.createElement("div");
+        if (role == "it" || role == "manager") {
+            let showWorker = ``;
+   
+            showWorker += `
+                <div class="gap-5 p-5 bg-blue-500 grid grid-cols-2 rounded-2xl">
+                    <img src="${infoWorker[i].imagE}" class="w-10 h-10 object-cover rounded-xl border"/>
+                    <div class="grid gap-1">
+                        <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
+                            <span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
+                        </h5> 
+                        <h5 class="text-[12px] font-semibold text-red-800">ROLE : 
+                            <span class="font-normal text-gray-600">${infoWorker[i].role}</span>
+                        </h5>
+                    </div>
+                </div>
+            `;
 
-            showServeurs.innerHTML = `
-            <div class="cursor-pointer">
-                <img 
-                        src="${infoWorker[i].imagE}" 
-                        class="w-9 h-9 object-cover rounded-full border"
-                    />
-            </div>`;
+            const tesOne = document.createElement("div");
+            tesOne.className = "w-56 bg-amber-300 place-self-center"
+            tesOne.innerHTML = `
+                <div>
+                    ${showWorker}
+                </div>`
+            const sectionWorkers = document.querySelector(".section-workers")
+            sectionWorkers.classList.remove("hidden");
+            showWorkers.append(tesOne);
 
-            const divRoomServeur = document.querySelector("#salle-serveurs");
+            //btn close show workers
+            const iconeCloseShow = document.querySelector("#close-showworkers")
 
-            divRoomServeur.appendChild(showServeurs);
+            iconeCloseShow.addEventListener('click', () => {
+                sectionWorkers.classList.add("hidden");
+            })
         }
     }
 })
