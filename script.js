@@ -28,6 +28,7 @@ function closeForm() {
     imagePreview.src = '';
     imagePreview.classList.add("hidden");
     placeholderText.classList.remove("hidden");
+    
 }
 
 //for show url image in image preview
@@ -116,25 +117,32 @@ subForm.addEventListener('click', (e) => {
     const role = roleWorker.value.trim();
     const imagE = imageWorker.value.trim();
 
+    const nameError = document.querySelector(".name-error");
+    const prenomError = document.querySelector(".prenom-error");
+    const emailError = document.querySelector(".email-error");
+    const photoError = document.querySelector(".photo-error");
+    const roleError = document.querySelector(".role-error");
+
+
     //conditions of all regex
     if (!nomRegex.test(nom)) {
-        alert("invalide nom !!!")
+        nameError.classList.remove("hidden");
         return;
     }
     if (!prenomRegex.test(prenom)) {
-        alert("invalide prenom !!!")
+        prenomError.classList.remove("hidden");
         return;
     }
     if (!emailRegex.test(email)) {
-        alert("email invalide !!!");
+        emailError.classList.remove("hidden");
         return;
     }
     if (!imageurlRegex.test(imagE)) {
-        alert("invalide url image !!!");
+        photoError.classList.remove("hidden");
         return;
     }
     if (!roleRegex.test(role)) {
-        alert("invalide role !!!");
+        roleError.classList.remove("hidden");
         return;
     }
 
@@ -218,7 +226,6 @@ subForm.addEventListener('click', (e) => {
 
         infoPopup.innerHTML = `
     <div class="all-info-popup bg-white w-full max-w-lg rounded-2xl shadow-xl p-4 h-[60vh] overflow-scroll [scrollbar-width:none] border-4 border-black/30">
-        <button class="delet-workers"><i class="fas fa-trash-can test-[7px] text-red-600"></i></button>
         <div class="grid grid-cols-[1fr 2fr] gap-5 p-5">
 
             <img src="${workers.imagE}" alt="Worker image" class="w-28 h-28 object-cover rounded-xl shadow-md border-amber-300/50 border-4">
@@ -245,12 +252,6 @@ subForm.addEventListener('click', (e) => {
         sectionPopup.innerHTML = '';
         sectionPopup.classList.remove("hidden");
         sectionPopup.append(infoPopup);
-
-        const deletWorker = document.querySelector(".delet-workers");
-
-        deletWorker.addEventListener('click', () => {
-            infoWorker.remove();
-        })
 
         document.body.addEventListener('click', (e) => {
             if (e.target === sectionPopup) {
@@ -283,7 +284,6 @@ const roomOfPersonnel = document.querySelector("#salle-personnel");
 const roomOfArchives = document.querySelector("#salle-archives");
 
 //function add to room workers
-
 const roomFist = document.getElementById("salle-conference"); 
 
 function addToRoom(infoWorker,i){ 
@@ -291,7 +291,6 @@ function addToRoom(infoWorker,i){
     const btnAddToRoom = document.querySelector(".btn-add-to-room");
 
      btnAddToRoom.addEventListener('click', () => { 
-
         let stockWorkerRoom = []; 
 
         stockWorkerRoom.push(infoWorker[i]) 
@@ -309,22 +308,26 @@ function addToRoom(infoWorker,i){
          </div>
         </div>` 
         roomSecurite.appendChild(roomFist); 
+
+        const deletSide = document.querySelector(".newOne")
+        deletSide.remove();
     }) 
 }
 
+//function card added in rooms
 function card(i){
     const worker = infoWorker[i];
 
     const cardDiv = document.createElement("div");
-    cardDiv.className = "card-room flex items-center gap-4 p-3 bg-white rounded-xl shadow-md border border-gray-300";
+    cardDiv.className = "card-room flex gap-4 p-1 bg-white w-[120px] rounded-xl shadow-md border h-[40px] border-gray-300";
 
     cardDiv.innerHTML = `
-        <img src="${worker.imagE}" class="w-12 h-12 rounded-lg border object-cover">
-        <div class="flex flex-col">
-            <h5 class="font-semibold">${worker.nom} ${worker.prenom}</h5>
-            <h5 class="text-sm text-gray-600">${worker.role}</h5>
-        </div>
-        <button class="delete-worker-room text-red-600 font-bold ml-auto">X</button>
+        <img src="${worker.imagE}" class="w-5 h-5 rounded-lg border object-cover">
+        <div class="">
+            <h5 class="font-semibold text-[6px]">${worker.nom} ${worker.prenom}</h5>
+            <h5 class="text-[6px] text-gray-600">${worker.role}</h5>
+            </div>
+            <button class="delete-worker-room text-red-600 font-bold ml-auto">X</button>
     `;
 
     cardDiv.querySelector(".delete-worker-room").addEventListener('click', () => {
@@ -388,6 +391,7 @@ roombtnConfirence.addEventListener('click', () => {
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
             ShowInRoom(infoWorker, i, roomOfConfirence)
         }
+        // infoWorker.splice(i, 1);
     }
 })
 //btn to show all can enter room serveurs
