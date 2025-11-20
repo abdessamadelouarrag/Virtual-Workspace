@@ -267,14 +267,25 @@ subForm.addEventListener('click', (e) => {
     placeholderText.classList.remove("hidden")
 })
 //all i need to show workers and add in his rooms
-const roombtnConfirence = document.querySelector(".btn-add-conference");
+const roombtnConfirence = document.querySelector(".btn-add-confirence");
 const roombtnServeurs = document.querySelector(".btn-add-serveurs");
 const roombtnSecurite = document.querySelector(".btn-add-securite");
 const roombtnReseption = document.querySelector(".btn-add-reseption");
 const roombtnPersonnel = document.querySelector(".btn-add-personnel");
 const roombtnArchives = document.querySelector(".btn-add-archives");
 
+//all divs rooms
+const roomOfConfirence = document.querySelector("#salle-confirence");
+const roomOfServeurs = document.querySelector("#salle-serveurs");
+const roomOfSecurite = document.querySelector("#salle-securite");
+const roomOfReseption =document.querySelector("#salle-reseption");
+const roomOfPersonnel = document.querySelector("#salle-personnel");
+const roomOfArchives = document.querySelector("#salle-archives");
+
 //function add to room workers
+
+const roomFist = document.getElementById("salle-conference"); 
+
 function addToRoom(infoWorker,i){ 
     
     const btnAddToRoom = document.querySelector(".btn-add-to-room");
@@ -297,14 +308,36 @@ function addToRoom(infoWorker,i){
             <h5>${stockWorkerRoom[i].role}</h5>
          </div>
         </div>` 
-        const roomFist = document.getElementById("salle-conference"); 
         roomSecurite.appendChild(roomFist); 
     }) 
 }
 
+function card(i){
+    const worker = infoWorker[i];
+
+    const cardDiv = document.createElement("div");
+    cardDiv.className = "card-room flex items-center gap-4 p-3 bg-white rounded-xl shadow-md border border-gray-300";
+
+    cardDiv.innerHTML = `
+        <img src="${worker.imagE}" class="w-12 h-12 rounded-lg border object-cover">
+        <div class="flex flex-col">
+            <h5 class="font-semibold">${worker.nom} ${worker.prenom}</h5>
+            <h5 class="text-sm text-gray-600">${worker.role}</h5>
+        </div>
+        <button class="delete-worker-room text-red-600 font-bold ml-auto">X</button>
+    `;
+
+    cardDiv.querySelector(".delete-worker-room").addEventListener('click', () => {
+        cardDiv.remove();
+    })
+
+    return cardDiv;
+}
+
 //function to show workers in his roomes
 function ShowInRoom(infoWorker, i, container){
-            const showWorkers = document.querySelector(".workers");
+
+const showWorkers = document.querySelector(".workers");
 
             let showWorker = `
                 <div class="flex items-center gap-4 p-4 bg-white shadow-md rounded-2xl border m-2 border-gray-200 hover:shadow-lg transition">
@@ -339,10 +372,10 @@ function ShowInRoom(infoWorker, i, container){
             })
 
             tesOne.querySelector(".btn-add-to-room").addEventListener('click', () => {
-                container.append(function cardinroom, id);
-                //lcard in room function kan3tiwha id o katrJ3 lina div dyal lkart li ghadi n7to f room m9ada 3la 7sab dak id li 3Tanaha
+                container.append(card(i));
             })
 }
+
 //btn to show all can enter room confirence
 roombtnConfirence.addEventListener('click', () => {
 
@@ -353,7 +386,7 @@ roombtnConfirence.addEventListener('click', () => {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
-            ShowInRoom(infoWorker, i, confirenceContainer)
+            ShowInRoom(infoWorker, i, roomOfConfirence)
         }
     }
 })
@@ -367,7 +400,7 @@ roombtnServeurs.addEventListener('click', () => {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "it" || role == "manager" || role == "nettoyage") {
-            ShowInRoom(infoWorker, i);
+            ShowInRoom(infoWorker, i, roomOfServeurs);
         }
     }
 })
@@ -381,7 +414,7 @@ roombtnSecurite.addEventListener('click', () => {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "manager" || role == "securite" || role == "nettoyage") {
-            ShowInRoom(infoWorker, i);
+            ShowInRoom(infoWorker, i, roomOfSecurite);
         }
     }
 })
@@ -395,7 +428,7 @@ roombtnReseption.addEventListener('click', () => {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "manager" || role == "nettoyage" || role == "reseption") {
-            ShowInRoom(infoWorker, i);
+            ShowInRoom(infoWorker, i, roomOfReseption);
         }
     }
 })
@@ -409,7 +442,7 @@ roombtnPersonnel.addEventListener('click', () => {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
-            ShowInRoom(infoWorker, i);
+            ShowInRoom(infoWorker, i, roomOfPersonnel);
         }
     }
 })
@@ -423,7 +456,7 @@ roombtnArchives.addEventListener('click', () => {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "manager") {
-            ShowInRoom(infoWorker, i);
+            ShowInRoom(infoWorker, i, roombtnArchives);
         }
     }
 })
