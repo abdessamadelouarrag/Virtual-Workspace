@@ -18,9 +18,7 @@
 
 ## Demo
 
-You can view a live demo here: [Your Live Demo Link]
-
-*(Replace with your Vercel/Netlify link if deployed)*
+You can view a live demo here: https://virtual-workspace-mauve.vercel.app/ .
 
 ---
 
@@ -49,28 +47,11 @@ git clone https://github.com/abdessamadelouarrag/Virtual-Workspace.git
 ## Technologies Used
 
 * **HTML5**
-* **CSS3**
+* **CSS3 Tailwind**
 * **JavaScript (ES6)**
 * **DOM Manipulation**
 * **Event Handling**
 * **Regex Validation**
-
----
-
-## Contributing
-
-1. Fork the repository.
-2. Create your feature branch: `git checkout -b feature/YourFeature`.
-3. Commit your changes: `git commit -m 'Add some feature'`.
-4. Push to the branch: `git push origin feature/YourFeature`.
-5. Open a Pull Request.
-
----
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
 ---
 
 ## Author
