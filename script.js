@@ -9,6 +9,9 @@ const formExperience = document.querySelector(".form-experience");
 const subForm = document.querySelector("#form-sub");
 let assignedWorkers = []
 
+//
+let newDevF;
+
 //btn for add new worker
 btnAdd.addEventListener('click', () => {
     sectionForm.classList.remove("hidden")
@@ -89,7 +92,6 @@ btnExperience.addEventListener('click', () => {
         })
     })
 })
-
 //for stock info workers
 let infoWorker = [];
 //all i need to take inputs from the form
@@ -98,11 +100,9 @@ const inputPrenom = document.querySelector("#prenom-worker");
 const emailWorker = document.querySelector("#email-worker");
 const imageWorker = document.querySelector("#imageUrl");
 const roleWorker = document.querySelector("#role-worker");
-
 //part submit of form
 subForm.addEventListener('click', (e) => {
     e.preventDefault();
-
     //regex for inputs in the form
     const nomRegex = /^[A-Za-z]{3,}$/;
     const prenomRegex = /^[A-Za-z]{3,}$/;
@@ -169,6 +169,7 @@ subForm.addEventListener('click', (e) => {
     //for take all info from the form global and form experiences
     const workers = {
         id: Date.now(),
+        inroom : false,
         nom,
         prenom,
         email,
@@ -204,7 +205,7 @@ subForm.addEventListener('click', (e) => {
 
     bordCreate.append(newDiv);
 
-    function newDevF(){
+    newDevF = function (){
         const infoPopup = document.createElement("div");
 
         let expPart = ``;
@@ -307,32 +308,34 @@ function card(i) {
     cardDiv.querySelector(".delete-worker-room").addEventListener('click', () => {
         cardDiv.remove();
 
-        
-
         //part dyal narj3 worker l sidebar 
-        // const newWorkerSideBar = document.createElement("div");
-        // newWorkerSideBar.className =
-        //     "newOne flex justify-around items-center gap-4 mt-3 bg-white shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer hover:bg-blue-100/90";
+        const newWorkerSideBar = document.createElement("div");
+        newWorkerSideBar.className =
+            "newOne flex justify-around items-center gap-4 mt-3 bg-white shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer hover:bg-blue-100/90";
+        newWorkerSideBar.id = worker.id
+        newWorkerSideBar.innerHTML = `
+            <img 
+                src="${worker.imagE}" 
+                class="w-10 h-10 object-cover rounded-xl border"
+            />
+            <div class="grid gap-1">
+                <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
+                    <span class="font-normal text-gray-600">${worker.nom}</span>
+                </h5> 
 
-        // newWorkerSideBar.innerHTML = `
-        //     <img 
-        //         src="${worker.imagE}" 
-        //         class="w-10 h-10 object-cover rounded-xl border"
-        //     />
-        //     <div class="grid gap-1">
-        //         <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
-        //             <span class="font-normal text-gray-600">${worker.nom}</span>
-        //         </h5> 
+                <h5 class="text-[12px] font-semibold text-red-800">ROLE : 
+                    <span class="font-normal text-gray-600">${worker.role}</span>
+                </h5>
+            </div>
+            `;
+            bordCreate.appendChild(newWorkerSideBar);
+            infoWorker.push(worker);
+            console.log(worker)
 
-        //         <h5 class="text-[12px] font-semibold text-red-800">ROLE : 
-        //             <span class="font-normal text-gray-600">${worker.role}</span>
-        //         </h5>
-        //     </div>
-        //     `;
-
-        //     newWorkerSideBar.addEventListener('click', () => {
-        //         newDevF();
-        //     })
+            newWorkerSideBar.addEventListener('click', ()=>{
+                newDevF();
+            })
+            
         })
 
 
@@ -382,6 +385,9 @@ function ShowInRoom(infoWorker, i, container) {
 
         //to remove worker after add in room in sidebar
         const sideBar = document.getElementById(infoWorker[i].id);
+
+        console.log(infoWorker[i].id)
+        console.log(sideBar)
         if (sideBar) {
             sideBar.remove();
         }
@@ -397,6 +403,7 @@ roombtnConfirence.addEventListener('click', () => {
     showWorkers.innerHTML = '';
 
     for (let i = 0; i < infoWorker.length; i++) {
+        console.log(infoWorker)
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
