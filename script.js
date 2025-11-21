@@ -7,6 +7,7 @@ const placeholderText = document.querySelector("#placeholderText");
 const bordCreate = document.querySelector(".place-workers");
 const formExperience = document.querySelector(".form-experience");
 const subForm = document.querySelector("#form-sub");
+let assignedWorkers = []
 
 //btn for add new worker
 btnAdd.addEventListener('click', () => {
@@ -28,7 +29,7 @@ function closeForm() {
     imagePreview.src = '';
     imagePreview.classList.add("hidden");
     placeholderText.classList.remove("hidden");
-    
+
 }
 
 //for show url image in image preview
@@ -156,7 +157,7 @@ subForm.addEventListener('click', (e) => {
         const dateStartExp = expDiv.querySelector("#date-start").value;
         const dateEndExp = expDiv.querySelector("#date-end").value;
 
-        if(dateStartExp > dateEndExp){
+        if (dateStartExp > dateEndExp) {
             alert("date start is incorrect!!!")
             dateStartExp.value = "";
             dateStartExp.focus();
@@ -169,6 +170,7 @@ subForm.addEventListener('click', (e) => {
 
     //for take all info from the form global and form experiences
     const workers = {
+        id: Date.now(),
         nom,
         prenom,
         email,
@@ -183,6 +185,7 @@ subForm.addEventListener('click', (e) => {
 
     //part create new div for show info worker in right bar
     const newDiv = document.createElement('div');
+    newDiv.id = workers.id
     newDiv.className =
         "newOne flex justify-around items-center gap-4 mt-3 bg-white shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer hover:bg-blue-100/90";
 
@@ -279,57 +282,56 @@ const roombtnArchives = document.querySelector(".btn-add-archives");
 const roomOfConfirence = document.querySelector("#salle-confirence");
 const roomOfServeurs = document.querySelector("#salle-serveurs");
 const roomOfSecurite = document.querySelector("#salle-securite");
-const roomOfReseption =document.querySelector("#salle-reseption");
+const roomOfReseption = document.querySelector("#salle-reseption");
 const roomOfPersonnel = document.querySelector("#salle-personnel");
 const roomOfArchives = document.querySelector("#salle-archives");
 
 //function add to room workers
-const roomFist = document.getElementById("salle-conference"); 
+const roomFist = document.getElementById("salle-conference");
 
-function addToRoom(infoWorker,i){ 
-    
-    const btnAddToRoom = document.querySelector(".btn-add-to-room");
+// function addToRoom(infoWorker, i) {
 
-     btnAddToRoom.addEventListener('click', () => { 
-        let stockWorkerRoom = []; 
+//     const btnAddToRoom = document.querySelector(".btn-add-to-room");
 
-        stockWorkerRoom.push(infoWorker[i]) 
+//     btnAddToRoom.addEventListener('click', () => {
+//         let stockWorkerRoom = [];
 
-        console.log(stockWorkerRoom); 
+//         stockWorkerRoom.push(infoWorker[i])
 
-        const roomSecurite = document.createElement("div");
+//         console.log(stockWorkerRoom);
 
-         roomSecurite.innerHTML = `
-         <div class="new-div-room flex">
-          <img src="${stockWorkerRoom[i].imagE}" alt="image-room"
-           <div class="info-room">
-            <h5>${stockWorkerRoom[i].nom}</h5>
-            <h5>${stockWorkerRoom[i].role}</h5>
-         </div>
-        </div>` 
-        roomSecurite.appendChild(roomFist); 
+//         const roomSecurite = document.createElement("div");
 
-        const deletSide = document.querySelector(".newOne")
-        deletSide.remove();
-    }) 
-}
+//         roomSecurite.innerHTML = `
+//          <div class="new-div-room flex">
+//           <img src="${stockWorkerRoom[i].imagE}" alt="image-room"
+//            <div class="info-room">
+//             <h5>${stockWorkerRoom[i].nom}</h5>
+//             <h5>${stockWorkerRoom[i].role}</h5>
+//          </div>
+//         </div>`
+//         roomSecurite.appendChild(roomFist);
+
+//         const deletSide = document.querySelector(".newOne")
+//         deletSide.remove();
+//     })
+// }
 
 //function card added in rooms
-function card(i){
+function card(i) {
     const worker = infoWorker[i];
 
     const cardDiv = document.createElement("div");
     cardDiv.className = "card-room flex gap-4 p-1 bg-white w-[120px] rounded-xl shadow-md border h-[40px] border-gray-300";
-
+    // cardDiv.id = infoWorker[i].id
     cardDiv.innerHTML = `
-        <img src="${worker.imagE}" class="w-5 h-5 rounded-lg border object-cover">
+        <img src="${worker.imagE}" class="w-6 h-6 rounded-lg border object-cover">
         <div class="">
-            <h5 class="font-semibold text-[6px]">${worker.nom} ${worker.prenom}</h5>
-            <h5 class="text-[6px] text-gray-600">${worker.role}</h5>
+            <h5 class="font-semibold text-[7px]">${worker.nom} ${worker.prenom}</h5>
+            <h5 class="text-[8px] text-gray-600">${worker.role}</h5>
             </div>
             <button class="delete-worker-room text-red-600 font-bold ml-auto">X</button>
     `;
-
     cardDiv.querySelector(".delete-worker-room").addEventListener('click', () => {
         cardDiv.remove();
     })
@@ -338,11 +340,11 @@ function card(i){
 }
 
 //function to show workers in his roomes
-function ShowInRoom(infoWorker, i, container){
+function ShowInRoom(infoWorker, i, container) {
 
-const showWorkers = document.querySelector(".workers");
+    const showWorkers = document.querySelector(".workers");
 
-            let showWorker = `
+    let showWorker = `
                 <div class="flex items-center gap-4 p-4 bg-white shadow-md rounded-2xl border m-2 border-gray-200 hover:shadow-lg transition">
                 <button class="btn-add-to-room bg-green-600 text-[8px] rounded-2xl p-2">ADD</button>
                 <img src="${infoWorker[i].imagE}" 
@@ -357,28 +359,31 @@ const showWorkers = document.querySelector(".workers");
             </div>
             `;
 
-            const tesOne = document.createElement("div");
-            tesOne.className = "w-full place-self-center"
-            tesOne.innerHTML = `
+    const tesOne = document.createElement("div");
+    tesOne.className = "w-full place-self-center"
+    tesOne.id = infoWorker[i].id
+    tesOne.innerHTML = `
                 <div class="m-2">
                     ${showWorker}
                 </div>`
-            const sectionWorkers = document.querySelector(".section-workers")
-            sectionWorkers.classList.remove("hidden");
-            showWorkers.append(tesOne);
+    const sectionWorkers = document.querySelector(".section-workers")
+    sectionWorkers.classList.remove("hidden");
+    showWorkers.append(tesOne);
 
-            //btn close show workers
-            const iconeCloseShow = document.querySelector("#close-showworkers")
+    //btn close show workers
+    const iconeCloseShow = document.querySelector("#close-showworkers")
 
-            iconeCloseShow.addEventListener('click', () => {
-                sectionWorkers.classList.add("hidden");
-            })
+    iconeCloseShow.addEventListener('click', () => {
+        sectionWorkers.classList.add("hidden");
+    })
+    tesOne.querySelector(".btn-add-to-room").addEventListener("click", () => {
 
-            tesOne.querySelector(".btn-add-to-room").addEventListener('click', () => {
-                container.append(card(i));
-            })
+        container.append(card(i)); // add card to room
+        tesOne.remove();
+        assignedWorkers.push(infoWorker[i]);
+        infoWorker.splice(i, 1);
+    });
 }
-
 //btn to show all can enter room confirence
 roombtnConfirence.addEventListener('click', () => {
 
@@ -391,7 +396,6 @@ roombtnConfirence.addEventListener('click', () => {
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
             ShowInRoom(infoWorker, i, roomOfConfirence)
         }
-        // infoWorker.splice(i, 1);
     }
 })
 //btn to show all can enter room serveurs
