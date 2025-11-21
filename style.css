@@ -54,3 +54,15 @@ body{
     grid-column: 4 / 5;
     grid-row: 3 / 4;
 }
+
+#add-new-worker{
+    font-family: "Bricolage Grotesque", sans-serif;
+}
+
+#title-work-space{
+    font-family: "Bricolage Grotesque", sans-serif;
+}
+
+#worker-ici{
+    font-family: "Bricolage Grotesque", sans-serif;
+}

@@ -8,10 +8,18 @@
 
     <!--seo-->
 
-    <meta name="description" content="Application de gestion interne des employés : ajoutez, organisez et assignez vos collaborateurs aux différentes salles (conférence, serveurs, sécurité, réception...). Interface moderne et intuitive.">
-    <meta name="keywords" content="gestion employés, assignation salles, workspace virtuel, gestion personnel, intranet entreprise">
+    <meta name="description"
+        content="Application de gestion interne des employés : ajoutez, organisez et assignez vos collaborateurs aux différentes salles (conférence, serveurs, sécurité, réception...). Interface moderne et intuitive.">
+    <meta name="keywords"
+        content="gestion employés, assignation salles, workspace virtuel, gestion personnel, intranet entreprise">
     <meta name="author" content="Votre Nom ou Entreprise">
 
+    <!--link font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Stack+Sans+Text:wght@200..700&display=swap" rel="stylesheet">
+
+    <!--link style css-->
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
@@ -24,38 +32,56 @@
             <div class="all-element-workspace grid gap-5 sm:flex lg:flex md:flex">
                 <div class="image-global border-2 border-white rounded-2xl overflow-hidden flex">
                     <div class="all-roomes border w-full">
-                        <div class="box1 grid grid-cols-3 grid-rows-2 gap-2 shadow-lg border-2 border-red-300 hover:bg-green-600/30 overflow-hidden">
-                            <button type="button" class="btn-add-confirence fixed flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow m-3 hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div
+                            class="box1 grid grid-cols-3 grid-rows-2 gap-2 shadow-lg border-2 border-red-300 hover:bg-green-600/30 overflow-hidden">
+                            <button type="button"
+                                class="btn-add-confirence fixed flex items-center justify-center w-8 h-8 rounded-full bg-[#120b57] text-white text-2xl font-bold shadow- m-3 hover:bg-green-500"><i
+                                    class="fas fa-plus"></i></button>
                             <div id="salle-confirence" class="ml-11 w-[320px] h-[180px]">
 
                             </div>
                         </div>
-                        <div class="box2 grid grid-cols-2 border-2 border-red-200 hover:bg-green-600/30 overflow-hidden">
-                            <button type="button" class="btn-add-serveurs flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow m-3 hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div
+                            class="box2 grid grid-cols-2 border-2 border-red-200 hover:bg-green-600/30 overflow-hidden">
+                            <button type="button"
+                                class="btn-add-serveurs flex items-center justify-center w-8 h-8 rounded-full bg-[#120b57] text-white text-2xl font-bold shadow m-3 hover:bg-green-500"><i
+                                    class="fas fa-plus"></i></button>
                             <div id="salle-serveurs" class="-ml-16 w-[180px] h-[180px]">
 
                             </div>
                         </div>
-                        <div class="box3 grid grid-cols-3 bg-red-600/30 border-2 border-blue-200 hover:bg-red-600/60 overflow-hidden">
-                            <button type="button" class="btn-add-securite flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow m-3 hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div
+                            class="box3 grid grid-cols-3 bg-red-600/30 border-2 border-blue-200 hover:bg-red-600/60 overflow-hidden">
+                            <button type="button"
+                                class="btn-add-securite flex items-center justify-center w-8 h-8 rounded-full bg-[#120b57] text-white text-2xl font-bold shadow m-3 hover:bg-green-500"><i
+                                    class="fas fa-plus"></i></button>
                             <div id="salle-securite" class="-ml-7 w-screen">
 
                             </div>
                         </div>
-                        <div class="box4 grid grid-cols-3 bg-red-600/30 border-2 border-blue-200 hover:bg-red-600/60 overflow-hidden">
-                            <button type="button" class="btn-add-reseption flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow m-3 hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div
+                            class="box4 grid grid-cols-3 bg-red-600/30 border-2 border-blue-200 hover:bg-red-600/60 overflow-hidden">
+                            <button type="button"
+                                class="btn-add-reseption flex items-center justify-center w-8 h-8 rounded-full bg-[#120b57] text-white text-2xl font-bold shadow m-3 hover:bg-green-500"><i
+                                    class="fas fa-plus"></i></button>
                             <div id="salle-reseption" class="-ml-20 w-[326px]">
 
                             </div>
                         </div>
-                        <div class="box5 grid grid-cols-3 border-2 border-blue-200 hover:bg-green-600/30 overflow-hidden">
-                            <button type="button" class="btn-add-personnel flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow m-3 hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div
+                            class="box5 grid grid-cols-3 border-2 border-blue-200 hover:bg-green-600/30 overflow-hidden">
+                            <button type="button"
+                                class="btn-add-personnel flex items-center justify-center w-8 h-8 rounded-full bg-[#120b57] text-white text-2xl font-bold shadow m-3 hover:bg-green-500"><i
+                                    class="fas fa-plus"></i></button>
                             <div id="salle-personnel" class="-ml-7 w-[174px]">
 
                             </div>
                         </div>
-                        <div class="box6 grid grid-cols-3 bg-red-600/30 border-2 border-blue-200 hover:bg-red-600/60 overflow-hidden">
-                            <button type="button" class="btn-add-archives flex items-center justify-center w-8 h-8 rounded-full bg-blue-600 text-white text-2xl font-bold shadow m-3 hover:bg-green-500"><i class="fas fa-plus"></i></button>
+                        <div
+                            class="box6 grid grid-cols-3 bg-red-600/30 border-2 border-blue-200 hover:bg-red-600/60 overflow-hidden">
+                            <button type="button"
+                                class="btn-add-archives flex items-center justify-center w-8 h-8 rounded-full bg-[#120b57] text-white text-2xl font-bold shadow m-3 hover:bg-green-500"><i
+                                    class="fas fa-plus"></i></button>
                             <div id="salle-archives" class="-ml-7 w-screen">
 
                             </div>
@@ -63,10 +89,14 @@
                     </div>
                 </div>
                 <div
-                    class="bord-create p-2.5 rounded-[10px] bg-blue-100/10 text-center border-[3px] border-white w-full sm:w-[25%]">
-                    <h1 class="font-bold text-[20px] pb-5 text-white lg:text-[40px]">WORK SPACE</h1>
-                    <button id="add-new-worker" class="pointer text-white bg-[#1301b6] p-2 rounded-xl font-bold text-[10px] lg:text-[20px]">Ajouter Employee</button>
-                    <div class="place-workers border mt-3 p-1 h-[70vh] sm:h-[59vh] lg:h-[380px] overflow-y-scroll [scrollbar-width:none]">
+                    class="bord-create p-2.5 rounded-[10px] bg-linear-to-br from-slate-900/95 to-slate-800/95 backdrop-blur-sm text-center border-[3px] border-white/20 w-full sm:w-[25%] shadow-2xl">
+                    <h1 id="title-work-space" class="font-bold text-[20px] pb-5 text-white lg:text-[40px] tracking-tight bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text">
+                        WORK SPACE</h1>
+                    <button id="add-new-worker"
+                        class="pointer text-white bg-gradient-to-r from-[#120b57] to-[#3b27d8] hover:from-[#0f0194] hover:to-[#1301b6] p-2 rounded-xl text-[8px] lg:text-[16px] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 active:scale-95">
+                        Ajouter Employee
+                    </button>
+                    <div class="place-workers border border-white/10 mt-3 p-1 h-[70vh] sm:h-[59vh] lg:h-[380px] overflow-y-scroll [scrollbar-width:none] bg-white/5 rounded-lg">
                     </div>
                 </div>
             </div>
@@ -75,7 +105,7 @@
         <section
             class="form-worker hidden flex justify-center py-6 items-center absolute place-self-center top-0 backdrop-blur w-full h-screen">
             <form
-                class="form-inside w-full max-w-lg bg-white/80 rounded-2xl shadow-lg p-8 h-full overflow-y-scroll [scrollbar-width:none]"
+                class="form-inside w-full max-w-lg bg-white/60 rounded-2xl shadow-lg p-8 h-full overflow-y-scroll [scrollbar-width:none]"
                 id="staffForm" novalidate>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <label class="flex flex-col">
@@ -121,8 +151,6 @@
                     </div>
                 </div>
 
-
-
                 <label class="flex flex-col mt-4">
                     <span class="text-sm font-medium mb-2">Poste de travail</span>
                     <select name="poste" required
@@ -158,17 +186,23 @@
             </form>
         </section>
 
-        <section class="info-popup fixed inset-0 flex justify-center items-center bg-black/40 backdrop-blur-sm z-50 hidden">
+        <section
+            class="info-popup fixed inset-0 flex justify-center items-center bg-black/40 backdrop-blur-sm z-50 hidden">
 
         </section>
 
         <section class="section-workers fixed inset-0 flex justify-center items-center bg-black/40 backdrop-blur-sm z-50 hidden">
-            <div class=" bg-amber-200 w-96 rounded-2xl max-h-[80vh] overflow-y-auto [scrollbar-width:none]">
-                <i class="fas fa-x cursor-pointer m-3" id="close-showworkers"></i>
-                <div class="workers w-full grid grid-cols-1">
+    
+            <div class="bg-gradient-to-b from-gray-600 to-black w-96 rounded-2xl max-h-[80vh] overflow-y-auto [scrollbar-width:none] shadow-xl border border-gray-700 p-4">
+                
+                <i class="fas fa-x cursor-pointer m-3 text-white hover:text-red-500 transition-colors duration-200" id="close-showworkers"></i>
+                <h1 id="worker-ici" class="flex justify-center font-bold text-white text-center text-lg mb-4">LE WORKER DISPONIBLE POUR ICI</h1>
+                <div class="workers w-full grid grid-cols-1 gap-3">
+                
                 </div>
             </div>
-        </section>
+</section>
+
 
 
     </main>

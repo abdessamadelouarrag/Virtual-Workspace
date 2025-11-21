@@ -169,7 +169,7 @@ subForm.addEventListener('click', (e) => {
     //for take all info from the form global and form experiences
     const workers = {
         id: Date.now(),
-        inroom : false,
+        inroom: false,
         nom,
         prenom,
         email,
@@ -185,69 +185,74 @@ subForm.addEventListener('click', (e) => {
     const newDiv = document.createElement('div');
     newDiv.id = workers.id
     newDiv.className =
-        "newOne flex justify-around items-center gap-4 mt-3 bg-white shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer hover:bg-blue-100/90";
+        "newOne flex justify-around items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer rounded-xl shadow-lg border border-gray-700 bg-gradient-to-r from-gray-500 to-black hover:from-gray-600 hover:to-gray-900 transition-all duration-300";
 
     newDiv.innerHTML = `
-   <img 
-     src="${workers.imagE}" 
-     class="w-10 h-10 object-cover rounded-xl border"
-   />
-   <div class="grid gap-1">
-      <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
-        <span class="font-normal text-gray-600">${workers.nom}</span>
-      </h5> 
+    <img 
+        src="${workers.imagE}" 
+        class="w-10 h-10 object-cover rounded-xl border border-gray-300"
+    />
+    <div class="grid gap-1">
+        <h5 class="text-[12px] font-semibold text-white">NOM : 
+            <span class="font-normal text-gray-300">${workers.nom}</span>
+        </h5> 
 
-      <h5 class="text-[12px] font-semibold text-red-800">ROLE : 
-        <span class="font-normal text-gray-600">${workers.role}</span>
-      </h5>
-   </div>
-`;
+        <h5 class="text-[12px] font-semibold text-white">ROLE : 
+            <span class="font-normal text-gray-300">${workers.role}</span>
+        </h5>
+    </div>
+    `;
+
+
 
     bordCreate.append(newDiv);
 
-    newDevF = function (){
+    newDevF = function (id) {
+        //find elem with same id
+        let worker = infoWorker.find((ele) => ele.id == id)
+
         const infoPopup = document.createElement("div");
 
         let expPart = ``;
 
-        workers.experience.forEach(exp => {
+        worker.experience.forEach(exp => {
             expPart += `
-            <br>
-             <h3 class="col-span-4 text-center font-bold text-black text-lg uppercase mt-4">Expériences</h3>
-        <div class="expCard border-2 border-green-300 flex flex-wrap bg-green-50 rounded-xl p-4 shadow-lg">
-            <div class="experience text-sm mt-3">
-                <p><span class="font-semibold">Poste :</span> ${exp.poste}</p>
-                <p><span class="font-semibold">Début :</span> ${exp.dateStartExp}</p>
-                <p><span class="font-semibold">Fin :</span> ${exp.dateEndExp}</p>
+        <br>
+        <h3 class="col-span-4 text-center font-bold text-white text-lg uppercase mt-4">Expériences</h3>
+        <div class="expCard border-2 border-gray-700 flex flex-wrap bg-gradient-to-r from-gray-500 to-black rounded-xl p-4 shadow-lg hover:from-gray-600 hover:to-gray-900 transition-all duration-300">
+            <div class="experience text-sm mt-3 text-white">
+                <p><span class="font-semibold text-gray-300">Poste :</span> ${exp.poste}</p>
+                <p><span class="font-semibold text-gray-300">Début :</span> ${exp.dateStartExp}</p>
+                <p><span class="font-semibold text-gray-300">Fin :</span> ${exp.dateEndExp}</p>
             </div>
         </div>
-        `;
+    `;
         });
 
-
         infoPopup.innerHTML = `
-    <div class="all-info-popup bg-white w-full max-w-lg rounded-2xl shadow-xl p-4 h-[60vh] overflow-scroll [scrollbar-width:none] border-4 border-black/30">
+    <div class="all-info-popup w-full max-w-lg rounded-2xl shadow-xl p-4 h-[60vh] overflow-scroll [scrollbar-width:none] border-4 border-black/30 bg-gradient-to-b from-gray-600 to-black">
         <div class="grid grid-cols-[1fr 2fr] gap-5 p-5">
 
-            <img src="${workers.imagE}" alt="Worker image" class="w-28 h-28 object-cover rounded-xl shadow-md border-amber-300/50 border-4">
+            <img src="${worker.imagE}" alt="Worker image" class="w-28 h-28 object-cover rounded-xl shadow-md border-amber-300/50 border-4">
 
-            <div class="infos gap-2 text-blue-700 text-sm border-[5px] h-[150px] p-3 col-span-1 rounded-xl shadow-lg">
-                <div class="border-b-2 border-blue-100 mb-3">
-                    <h3 class="font-bold text-black text-center"><i class="fas fa-person"></i> INFO GLOBAL</h3>
+            <div class="infos gap-2 text-sm col-span-1 rounded-xl shadow-lg p-3 bg-gray-800 border-[2px] border-gray-700 text-white">
+                <div class="border-b-2 border-gray-600 mb-3">
+                    <h3 class="font-bold text-center text-white"><i class="fas fa-person"></i> INFO GLOBAL</h3>
                 </div>
-                <h5><span class="font-semibold">Nom :</span> ${workers.nom}</h5>
-                <h5><span class="font-semibold">Prénom :</span> ${workers.prenom}</h5>
-                <h5><span class="font-semibold">Rôle :</span> ${workers.role}</h5>
-                <h5><span class="font-semibold">Email :</span> ${workers.email}</h5>
+                <h5><span class="font-semibold text-gray-300">Nom :</span> ${worker.nom}</h5>
+                <h5><span class="font-semibold text-gray-300">Prénom :</span> ${worker.prenom}</h5>
+                <h5><span class="font-semibold text-gray-300">Rôle :</span> ${worker.role}</h5>
+                <h5><span class="font-semibold text-gray-300">Email :</span> ${worker.email}</h5>
             </div>
 
             <div class="col-span-2">
-                ${expPart || "No Experiences"}
+                ${expPart || `<p class="text-gray-300 text-center mt-4">No Experiences</p>`}
             </div>
 
         </div>
     </div>
-    `;
+`;
+
 
         const sectionPopup = document.querySelector(".info-popup");
         sectionPopup.innerHTML = '';
@@ -263,9 +268,9 @@ subForm.addEventListener('click', (e) => {
 
 
     newDiv.addEventListener('click', () => {
-        newDevF();
+        newDevF(newDiv.id);
     })
-   
+
 
     formExperience.innerHTML = ``;
     sectionForm.classList.add("hidden");
@@ -295,48 +300,47 @@ function card(i) {
     const worker = infoWorker[i];
 
     const cardDiv = document.createElement("div");
-    cardDiv.className = "card-room flex gap-4 p-1 bg-white w-[120px] rounded-xl shadow-md border h-[40px] border-gray-300";
-    // cardDiv.id = infoWorker[i].id
+    cardDiv.className = "card-room flex gap-2 p-1 w-[120px] h-[40px] rounded-xl shadow-md border border-gray-700 bg-gradient-to-r from-gray-500 to-black hover:from-gray-600 hover:to-gray-900 transition-all duration-300 items-center";
+
     cardDiv.innerHTML = `
-        <img src="${worker.imagE}" class="w-6 h-6 rounded-lg border object-cover">
-        <div class="">
-            <h5 class="font-semibold text-[7px]">${worker.nom} ${worker.prenom}</h5>
-            <h5 class="text-[8px] text-gray-600">${worker.role}</h5>
-            </div>
-            <button class="delete-worker-room text-red-600 font-bold ml-auto">X</button>
+        <img src="${worker.imagE}" class="w-6 h-6 rounded-lg border border-gray-300 object-cover">
+        <div class="flex flex-col">
+            <h5 class="font-semibold text-[8px] text-white">${worker.nom} ${worker.prenom}</h5>
+            <h5 class="text-[7px] text-gray-300">${worker.role}</h5>
+        </div>
+        <button class="delete-worker-room text-red-500 font-bold ml-auto hover:text-red-700 transition-colors duration-200">X</button>
     `;
+
     cardDiv.querySelector(".delete-worker-room").addEventListener('click', () => {
         cardDiv.remove();
 
         //part dyal narj3 worker l sidebar 
         const newWorkerSideBar = document.createElement("div");
-        newWorkerSideBar.className =
-            "newOne flex justify-around items-center gap-4 mt-3 bg-white shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer hover:bg-blue-100/90";
+        newWorkerSideBar.className ="newOne flex justify-around items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer rounded-xl shadow-lg border border-gray-700 bg-gradient-to-r from-gray-500 to-black hover:from-gray-600 hover:to-gray-900 transition-all duration-300";
         newWorkerSideBar.id = worker.id
         newWorkerSideBar.innerHTML = `
-            <img 
-                src="${worker.imagE}" 
-                class="w-10 h-10 object-cover rounded-xl border"
-            />
-            <div class="grid gap-1">
-                <h5 class="text-[12px] font-semibold text-gray-800">NOM : 
-                    <span class="font-normal text-gray-600">${worker.nom}</span>
-                </h5> 
+           <img 
+        src="${worker.imagE}" 
+        class="w-10 h-10 object-cover rounded-xl border border-gray-300"/>
+        <div class="grid gap-1">
+            <h5 class="text-[12px] font-semibold text-white">NOM : 
+                <span class="font-normal text-gray-300">${worker.nom}</span>
+            </h5> 
 
-                <h5 class="text-[12px] font-semibold text-red-800">ROLE : 
-                    <span class="font-normal text-gray-600">${worker.role}</span>
-                </h5>
-            </div>
-            `;
-            bordCreate.appendChild(newWorkerSideBar);
-            infoWorker.push(worker);
-            console.log(worker)
+            <h5 class="text-[12px] font-semibold text-white">ROLE : 
+                <span class="font-normal text-gray-300">${worker.role}</span>
+            </h5>
+        </div>
+        `;
+        bordCreate.appendChild(newWorkerSideBar);
+        infoWorker.push(worker);
+        console.log(worker)
 
-            newWorkerSideBar.addEventListener('click', ()=>{
-                newDevF();
-            })
-            
+        newWorkerSideBar.addEventListener('click', () => {
+            newDevF(worker.id);
         })
+
+    })
 
 
     return cardDiv;
@@ -348,19 +352,20 @@ function ShowInRoom(infoWorker, i, container) {
     const showWorkers = document.querySelector(".workers");
 
     let showWorker = `
-                <div class="flex items-center gap-4 p-4 bg-white shadow-md rounded-2xl border m-2 border-gray-200 hover:shadow-lg transition">
-                <button class="btn-add-to-room bg-green-600 text-[8px] rounded-2xl p-2">ADD</button>
-                <img src="${infoWorker[i].imagE}" 
-                    class="w-14 h-14 object-cover rounded-xl border border-gray-300">
+    <div class="flex items-center gap-4 p-4 rounded-2xl border border-gray-700 bg-gradient-to-r from-gray-500 to-black shadow-md hover:shadow-lg hover:from-gray-600 hover:to-gray-900 transition-all duration-300 m-2">
 
-                <div class="flex flex-col gap-1">
-                    <h5 class="text-[13px] font-semibold text-gray-700">NOM :<span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
-                    </h5>
-                    <h5 class="text-[13px] font-semibold text-blue-600">ROLE :<span class="font-normal text-gray-600">${infoWorker[i].role}</span>
-                    </h5>
-                </div>
-            </div>
-            `;
+        <button class="btn-add-to-room bg-green-600 text-[8px] rounded-2xl text-white p-2 hover:bg-green-700 transition-colors duration-200">ADD</button>
+
+        <img src="${infoWorker[i].imagE}" 
+            class="w-14 h-14 object-cover rounded-xl border border-gray-300">
+
+        <div class="flex flex-col gap-1">
+            <h5 class="text-[13px] font-semibold text-white">NOM : <span class="font-normal text-gray-300">${infoWorker[i].nom}</span></h5>
+            <h5 class="text-[13px] font-semibold text-white">ROLE : <span class="font-normal text-gray-300">${infoWorker[i].role}</span></h5>
+        </div>
+    </div>
+`;
+
 
     const tesOne = document.createElement("div");
     tesOne.className = "w-full place-self-center"
