@@ -8,6 +8,7 @@ const bordCreate = document.querySelector(".place-workers");
 const formExperience = document.querySelector(".form-experience");
 const subForm = document.querySelector("#form-sub");
 let assignedWorkers = []
+let test = []
 
 //btn for add new worker
 btnAdd.addEventListener('click', () => {
@@ -149,7 +150,6 @@ subForm.addEventListener('click', (e) => {
 
     //arrzy for stock experiences of workers
     let experienceWorker = [];
-
     const formExperiences = document.querySelectorAll(".form-exper");
 
     formExperiences.forEach(expDiv => {
@@ -157,7 +157,7 @@ subForm.addEventListener('click', (e) => {
         const dateStartExp = expDiv.querySelector("#date-start").value;
         const dateEndExp = expDiv.querySelector("#date-end").value;
 
-        if (dateStartExp > dateEndExp) {
+        if (dateStartExp && dateEndExp && dateStartExp > dateEndExp) {
             alert("date start is incorrect!!!")
             dateStartExp.value = "";
             dateStartExp.focus();
@@ -289,99 +289,163 @@ const roomOfArchives = document.querySelector("#salle-archives");
 //function add to room workers
 const roomFist = document.getElementById("salle-conference");
 
-// function addToRoom(infoWorker, i) {
-
-//     const btnAddToRoom = document.querySelector(".btn-add-to-room");
-
-//     btnAddToRoom.addEventListener('click', () => {
-//         let stockWorkerRoom = [];
-
-//         stockWorkerRoom.push(infoWorker[i])
-
-//         console.log(stockWorkerRoom);
-
-//         const roomSecurite = document.createElement("div");
-
-//         roomSecurite.innerHTML = `
-//          <div class="new-div-room flex">
-//           <img src="${stockWorkerRoom[i].imagE}" alt="image-room"
-//            <div class="info-room">
-//             <h5>${stockWorkerRoom[i].nom}</h5>
-//             <h5>${stockWorkerRoom[i].role}</h5>
-//          </div>
-//         </div>`
-//         roomSecurite.appendChild(roomFist);
-
-//         const deletSide = document.querySelector(".newOne")
-//         deletSide.remove();
-//     })
-// }
-
 //function card added in rooms
 function card(i) {
-    const worker = infoWorker[i];
+    const worker = infoWorker[i] || i; 
+
+    if (!worker) return document.createElement("div"); 
 
     const cardDiv = document.createElement("div");
     cardDiv.className = "card-room flex gap-4 p-1 bg-white w-[120px] rounded-xl shadow-md border h-[40px] border-gray-300";
-    // cardDiv.id = infoWorker[i].id
+    cardDiv.id = "room-card-" + worker.id;  //id for room card
     cardDiv.innerHTML = `
         <img src="${worker.imagE}" class="w-6 h-6 rounded-lg border object-cover">
         <div class="">
             <h5 class="font-semibold text-[7px]">${worker.nom} ${worker.prenom}</h5>
             <h5 class="text-[8px] text-gray-600">${worker.role}</h5>
-            </div>
-            <button class="delete-worker-room text-red-600 font-bold ml-auto">X</button>
+        </div>
+        <button class="delete-worker-room text-red-600 font-bold ml-auto">X</button>
     `;
-    cardDiv.querySelector(".delete-worker-room").addEventListener('click', () => {
-        cardDiv.remove();
-    })
+
+    // delete button retorn worker to sidebar
+    cardDiv.querySelector(".delete-worker-room").addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        cardDiv.remove();     // remove from room
+
+        //add worker back to list global
+        infoWorker.push(worker);
+
+
+        const newSidebarDiv = document.createElement('div');
+        newSidebarDiv.id = worker.id;  // reuse original ID
+        newSidebarDiv.className = "newOne flex justify-around items-center gap-4 mt-3 bg-white shadow-lg rounded-xl p-4 border border-gray-200 w-full max-w-md cursor-pointer hover:bg-blue-100/90";
+        newSidebarDiv.innerHTML = `
+            <img src="${worker.imagE}" class="w-10 h-10 object-cover rounded-xl border" />
+            <div class="grid gap-1">
+                <h5 class="text-[12px] font-semibold text-gray-800">NOM: 
+                    <span class="font-normal text-gray-600">${worker.nom}</span>
+                </h5> 
+                <h5 class="text-[12px] font-semibold text-red-800">ROLE: 
+                    <span class="font-normal text-gray-600">${worker.role}</span>
+                </h5>
+            </div>
+        `;
+        
+        newSidebarDiv.addEventListener('click', () => {
+            const infoPopup = document.createElement("div");
+
+            let expPart = ``;
+            worker.experience.forEach(exp => {
+                expPart += `
+                <br>
+                <h3 class="col-span-4 text-center font-bold text-black text-lg uppercase mt-4">Expériences</h3>
+                <div class="expCard border-2 border-green-300 flex flex-wrap bg-green-50 rounded-xl p-4 shadow-lg">
+                    <div class="experience text-sm mt-3">
+                        <p><span class="font-semibold">Poste :</span> ${exp.poste}</p>
+                        <p><span class="font-semibold">Début :</span> ${exp.dateStartExp}</p>
+                        <p><span class="font-semibold">Fin :</span> ${exp.dateEndExp}</p>
+                    </div>
+                </div>
+                `;
+            });
+
+            infoPopup.innerHTML = `
+                <div class="all-info-popup bg-white w-full max-w-lg rounded-2xl shadow-xl p-4 h-[60vh] overflow-scroll [scrollbar-width:none] border-4 border-black/30">
+                    <div class="grid grid-cols-[1fr 2fr] gap-5 p-5">
+                        <img src="${worker.imagE}" alt="Worker image" class="w-28 h-28 object-cover rounded-xl shadow-md border-amber-300/50 border-4">
+                        <div class="infos gap-2 text-blue-700 text-sm border-[5px] h-[150px] p-3 col-span-1 rounded-xl shadow-lg">
+                            <div class="border-b-2 border-blue-100 mb-3">
+                                <h3 class="font-bold text-black text-center"><i class="fas fa-person"></i> INFO GLOBAL</h3>
+                            </div>
+                            <h5><span class="font-semibold">Nom :</span> ${worker.nom}</h5>
+                            <h5><span class="font-semibold">Prénom :</span> ${worker.prenom}</h5>
+                            <h5><span class="font-semibold">Rôle :</span> ${worker.role}</h5>
+                            <h5><span class="font-semibold">Email :</span> ${worker.email}</h5>
+                        </div>
+                        <div class="col-span-2">
+                            ${expPart || "No Experiences"}
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const sectionPopup = document.querySelector(".info-popup");
+            sectionPopup.innerHTML = '';
+            sectionPopup.classList.remove("hidden");
+            sectionPopup.append(infoPopup);
+
+            document.body.addEventListener('click', (e) => {
+                if (e.target === sectionPopup) {
+                    sectionPopup.classList.add("hidden");
+                }
+            });
+        });
+
+        // Add to sidebar
+        bordCreate.append(newSidebarDiv);
+
+        // Optional: Show a quick success message
+        console.log(`${worker.nom} returned to available workers!`);
+    });
 
     return cardDiv;
 }
 
 //function to show workers in his roomes
 function ShowInRoom(infoWorker, i, container) {
+    const worker = infoWorker[i];  // get the worker
 
     const showWorkers = document.querySelector(".workers");
 
     let showWorker = `
-                <div class="flex items-center gap-4 p-4 bg-white shadow-md rounded-2xl border m-2 border-gray-200 hover:shadow-lg transition">
-                <button class="btn-add-to-room bg-green-600 text-[8px] rounded-2xl p-2">ADD</button>
-                <img src="${infoWorker[i].imagE}" 
-                    class="w-14 h-14 object-cover rounded-xl border border-gray-300">
-
-                <div class="flex flex-col gap-1">
-                    <h5 class="text-[13px] font-semibold text-gray-700">NOM :<span class="font-normal text-gray-600">${infoWorker[i].nom}</span>
-                    </h5>
-                    <h5 class="text-[13px] font-semibold text-blue-600">ROLE :<span class="font-normal text-gray-600">${infoWorker[i].role}</span>
-                    </h5>
-                </div>
+        <div class="flex items-center gap-4 p-4 bg-white shadow-md rounded-2xl border m-2 border-gray-200 hover:shadow-lg transition">
+            <button class="btn-add-to-room bg-green-600 text-[8px] rounded-2xl p-2">ADD</button>
+            <img src="${worker.imagE}" 
+                class="w-14 h-14 object-cover rounded-xl border border-gray-300">
+            <div class="flex flex-col gap-1">
+                <h5 class="text-[13px] font-semibold text-gray-700">NOM :<span class="font-normal text-gray-600">${worker.nom}</span></h5>
+                <h5 class="text-[13px] font-semibold text-blue-600">ROLE :<span class="font-normal text-gray-600">${worker.role}</span></h5>
             </div>
-            `;
+        </div>
+    `;
 
     const tesOne = document.createElement("div");
-    tesOne.className = "w-full place-self-center"
-    tesOne.id = infoWorker[i].id
-    tesOne.innerHTML = `
-                <div class="m-2">
-                    ${showWorker}
-                </div>`
-    const sectionWorkers = document.querySelector(".section-workers")
+    tesOne.className = "w-full place-self-center";
+    tesOne.id = worker.id;  //use worker.id
+    tesOne.innerHTML = `<div class="m-2">${showWorker}</div>`;
+
+    const sectionWorkers = document.querySelector(".section-workers");
     sectionWorkers.classList.remove("hidden");
     showWorkers.append(tesOne);
 
-    //btn close show workers
-    const iconeCloseShow = document.querySelector("#close-showworkers")
+    // Close button
+    const iconeCloseShow = document.querySelector("#close-showworkers");
+    iconeCloseShow.onclick = () => sectionWorkers.classList.add("hidden");
 
-    iconeCloseShow.addEventListener('click', () => {
-        sectionWorkers.classList.add("hidden");
-    })
+    // add button
     tesOne.querySelector(".btn-add-to-room").addEventListener("click", () => {
+        // Add card to the room
+        container.appendChild(card(i));
 
-        container.append(card(i)); // add card to room
+        // Remove from sidebar
+        const sidebarCard = document.getElementById(worker.id);
+        if (sidebarCard) {
+            sidebarCard.remove();
+        }
+
+        // Remove this worker from infoWorker array
+        const indexToRemove = infoWorker.findIndex(w => w.id === worker.id);
+        if (indexToRemove !== -1) {
+            infoWorker.splice(indexToRemove, 1);
+        }
+
+        // Remove from popup list
         tesOne.remove();
-        assignedWorkers.push(infoWorker[i]);
-        infoWorker.splice(i, 1);
+
+        // If no workers left (hide popup)
+        if (infoWorker.length === 0) {
+            sectionWorkers.classList.add("hidden");
+        }
     });
 }
 //btn to show all can enter room confirence
@@ -464,7 +528,7 @@ roombtnArchives.addEventListener('click', () => {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "manager") {
-            ShowInRoom(infoWorker, i, roombtnArchives);
+            ShowInRoom(infoWorker, i, roomOfArchives);
         }
     }
 })
