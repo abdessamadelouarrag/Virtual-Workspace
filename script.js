@@ -156,7 +156,7 @@ subForm.addEventListener('click', (e) => {
         const dateStartExp = expDiv.querySelector("#date-start").value;
         const dateEndExp = expDiv.querySelector("#date-end").value;
 
-        if (dateStartExp > dateEndExp) {
+        if (dateStartExp > dateEndExp || dateStartExp == dateEndExp) {
             alert("date start is incorrect!!!")
             dateStartExp.value = "";
             dateStartExp.focus();
@@ -387,7 +387,6 @@ function ShowInRoom(infoWorker, i, container) {
     tesOne.querySelector(".btn-add-to-room").addEventListener("click", () => {
         container.append(card(i)); // add card to room
         tesOne.remove();
-
         //to remove worker after add in room in sidebar
         const sideBar = document.getElementById(infoWorker[i].id);
 
@@ -401,19 +400,36 @@ function ShowInRoom(infoWorker, i, container) {
         infoWorker.splice(i, 1);
     });
 }
+
+//function to show msg no worker for this room
+function msgNoWorker(){
+    const msgWorker = document.querySelector(".msg-no-worker");
+    msgWorker.classList.remove("hidden");
+
+    setTimeout(() => {
+        msgWorker.classList.add("hidden");
+    },3000)
+}
+
 //btn to show all can enter room confirence
 roombtnConfirence.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
+    //for know if worker aviliable
+    let check = 0;
+
     for (let i = 0; i < infoWorker.length; i++) {
-        console.log(infoWorker)
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
             ShowInRoom(infoWorker, i, roomOfConfirence)
+            check = 1;
         }
+    }
+    if(check != 1){
+        msgNoWorker();
     }
 })
 //btn to show all can enter room serveurs
@@ -422,12 +438,18 @@ roombtnServeurs.addEventListener('click', () => {
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
+    let check = 0;
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "it" || role == "manager" || role == "nettoyage") {
             ShowInRoom(infoWorker, i, roomOfServeurs);
+            check = 1;
         }
+    }
+    if(check != 1){
+        msgNoWorker();
     }
 })
 //btn to show all can enter room securite
@@ -436,12 +458,18 @@ roombtnSecurite.addEventListener('click', () => {
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
+    let check = 0;
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "manager" || role == "securite" || role == "nettoyage") {
             ShowInRoom(infoWorker, i, roomOfSecurite);
+            check = 1
         }
+    }
+    if(check != 1){
+        msgNoWorker();
     }
 })
 //btn to show all can enter room reseption
@@ -450,12 +478,18 @@ roombtnReseption.addEventListener('click', () => {
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
+    let check = 0;
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "manager" || role == "nettoyage" || role == "reseption") {
             ShowInRoom(infoWorker, i, roomOfReseption);
+            check = 1;
         }
+    }
+    if(check != 1){
+        msgNoWorker();
     }
 })
 //btn to show all can enter room personnel
@@ -464,12 +498,18 @@ roombtnPersonnel.addEventListener('click', () => {
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
+    let check = 0;
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "it" || role == "manager" || role == "securite" || role == "nettoyage" || role == "reseption" || role == "autres") {
             ShowInRoom(infoWorker, i, roomOfPersonnel);
+            check = 1;
         }
+    }
+    if(check != 1){
+        msgNoWorker();
     }
 })
 //btn to show all can enter room archives
@@ -478,11 +518,17 @@ roombtnArchives.addEventListener('click', () => {
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
+    let check = 0;
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
         if (role == "manager") {
             ShowInRoom(infoWorker, i, roomOfArchives);
+            check = 1;
         }
+    }
+    if(check != 1){
+        msgNoWorker();
     }
 })
