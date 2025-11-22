@@ -169,7 +169,7 @@ subForm.addEventListener('click', (e) => {
     //for take all info from the form global and form experiences
     const workers = {
         id: Date.now(),
-        inroom: false,
+        room : null,
         nom,
         prenom,
         email,
@@ -304,6 +304,7 @@ function card(i) {
         <div class="flex flex-col">
             <h5 class="font-semibold text-[8px] text-white">${worker.nom} ${worker.prenom}</h5>
             <h5 class="text-[7px] text-gray-300">${worker.role}</h5>
+            <h5 class="text-[7px] text-gray-300">${worker.room}</h5>
         </div>
         <button class="delete-worker-room text-red-500 font-bold ml-auto hover:text-red-700 transition-colors duration-200">X</button>
     `;
@@ -380,6 +381,7 @@ function ShowInRoom(infoWorker, i, container) {
     })
     tesOne.querySelector(".btn-add-to-room").addEventListener("click", () => {
 
+        infoWorker[i].room = container.id 
         container.append(card(i)); // add card to room
         tesOne.remove();
         //to remove worker after add in room in sidebar
