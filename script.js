@@ -202,9 +202,6 @@ subForm.addEventListener('click', (e) => {
         </h5>
     </div>
     `;
-
-
-
     bordCreate.append(newDiv);
 
     newDevF = function (id) {
@@ -334,15 +331,12 @@ function card(i) {
         `;
         bordCreate.appendChild(newWorkerSideBar);
         infoWorker.push(worker);
-        console.log(worker)
 
         newWorkerSideBar.addEventListener('click', () => {
             newDevF(worker.id);
         })
 
     })
-
-
     return cardDiv;
 }
 
@@ -385,19 +379,20 @@ function ShowInRoom(infoWorker, i, container) {
         sectionWorkers.classList.add("hidden");
     })
     tesOne.querySelector(".btn-add-to-room").addEventListener("click", () => {
+
         container.append(card(i)); // add card to room
         tesOne.remove();
         //to remove worker after add in room in sidebar
         const sideBar = document.getElementById(infoWorker[i].id);
 
-        console.log(infoWorker[i].id)
-        console.log(sideBar)
         if (sideBar) {
             sideBar.remove();
         }
-        assignedWorkers.push(infoWorker[i]);
+        // assignedWorkers.push(infoWorker[i]);
         //to remove element 1 in array infoworker
         infoWorker.splice(i, 1);
+        //for close section workers after add in room
+        sectionWorkers.classList.add("hidden")
     });
 }
 
@@ -411,14 +406,16 @@ function msgNoWorker(){
     },3000)
 }
 
+/**this part for add worker in his room **/
+
+//for know if worker aviliable
+let check = 0;
+
 //btn to show all can enter room confirence
 roombtnConfirence.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
-
-    //for know if worker aviliable
-    let check = 0;
 
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
@@ -438,8 +435,6 @@ roombtnServeurs.addEventListener('click', () => {
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
-    let check = 0;
-
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
@@ -457,8 +452,6 @@ roombtnSecurite.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
-
-    let check = 0;
 
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
@@ -478,8 +471,6 @@ roombtnReseption.addEventListener('click', () => {
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
-    let check = 0;
-
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
@@ -498,8 +489,6 @@ roombtnPersonnel.addEventListener('click', () => {
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
-    let check = 0;
-
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
@@ -517,8 +506,6 @@ roombtnArchives.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
-
-    let check = 0;
 
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
