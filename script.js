@@ -185,8 +185,7 @@ subForm.addEventListener('click', (e) => {
     const newDiv = document.createElement('div');
     newDiv.id = workers.id
     newDiv.className =
-        "newOne flex justify-around items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer rounded-xl shadow-lg border border-gray-700 bg-gradient-to-r from-gray-500 to-black hover:from-gray-600 hover:to-gray-900 transition-all duration-300";
-
+        "newOne flex justify-around items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer rounded-xl shadow-lg border border-gray-700 bg-gray-600 hover:bg-gray-500";
     newDiv.innerHTML = `
     <img 
         src="${workers.imagE}" 
@@ -297,7 +296,7 @@ function card(i) {
     const worker = infoWorker[i];
 
     const cardDiv = document.createElement("div");
-    cardDiv.className = "card-room flex gap-2 p-1 w-[120px] h-[40px] rounded-xl shadow-md border border-gray-700 bg-gradient-to-r from-gray-500 to-black hover:from-gray-600 hover:to-gray-900 transition-all duration-300 items-center";
+    cardDiv.className = "card-room flex gap-2 p-1 w-[120px] h-[40px] rounded-xl shadow-md border border-gray-700 bg-gray-600 hover:bg-gray-500 items-center";
 
     cardDiv.innerHTML = `
         <img src="${worker.imagE}" class="w-6 h-6 rounded-lg border border-gray-300 object-cover">
@@ -317,9 +316,7 @@ function card(i) {
         newWorkerSideBar.className ="newOne flex justify-around items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer rounded-xl shadow-lg border border-gray-700 bg-gradient-to-r from-gray-500 to-black hover:from-gray-600 hover:to-gray-900 transition-all duration-300";
         newWorkerSideBar.id = worker.id
         newWorkerSideBar.innerHTML = `
-           <img 
-        src="${worker.imagE}" 
-        class="w-10 h-10 object-cover rounded-xl border border-gray-300"/>
+        <img src="${worker.imagE}" class="w-10 h-10 object-cover rounded-xl border border-gray-300"/>
         <div class="grid gap-1">
             <h5 class="text-[12px] font-semibold text-white">NOM : 
                 <span class="font-normal text-gray-300">${worker.nom}</span>
@@ -341,13 +338,22 @@ function card(i) {
     return cardDiv;
 }
 
+//function check limit in rooms
+function checkLimit(container){
+
+    if(container.children.length >= 1){
+        return false;
+    }
+    return true;
+}
+
 //function to show workers in his roomes
 function ShowInRoom(infoWorker, i, container) {
 
     const showWorkers = document.querySelector(".workers");
 
     let showWorker = `
-    <div class="flex items-center gap-4 p-4 rounded-2xl border border-gray-700 bg-gradient-to-r from-gray-500 to-black shadow-md hover:shadow-lg hover:from-gray-600 hover:to-gray-900 transition-all duration-300 m-2">
+    <div class="flex items-center gap-4 p-4 rounded-2xl border border-gray-700 bg-gray-500 shadow-md hover:shadow-lg hover:from-gray-600 hover:to-gray-900 transition-all duration-300 m-2">
 
         <button class="btn-add-to-room bg-green-600 text-[8px] rounded-2xl text-white p-2 hover:bg-green-700 transition-colors duration-200">ADD</button>
 
@@ -360,7 +366,6 @@ function ShowInRoom(infoWorker, i, container) {
         </div>
     </div>
 `;
-
 
     const tesOne = document.createElement("div");
     tesOne.className = "w-full place-self-center"
@@ -380,6 +385,12 @@ function ShowInRoom(infoWorker, i, container) {
         sectionWorkers.classList.add("hidden");
     })
     tesOne.querySelector(".btn-add-to-room").addEventListener("click", () => {
+        
+        // for check if false (limite) and stop
+        if(checkLimit(container) == false){
+            alert("Vous avez depass la limite ! ")
+            return;
+        }
 
         infoWorker[i].room = container.id 
         container.append(card(i)); // add card to room
@@ -390,7 +401,6 @@ function ShowInRoom(infoWorker, i, container) {
         if (sideBar) {
             sideBar.remove();
         }
-        // assignedWorkers.push(infoWorker[i]);
         //to remove element 1 in array infoworker
         infoWorker.splice(i, 1);
         //for close section workers after add in room
@@ -410,14 +420,14 @@ function msgNoWorker(){
 
 /**this part for add worker in his room **/
 
-//for know if worker aviliable
-let check = 0;
-
 //btn to show all can enter room confirence
 roombtnConfirence.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
+
+    //for know if worker aviliable
+    let check = 0;
 
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
@@ -437,6 +447,9 @@ roombtnServeurs.addEventListener('click', () => {
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
+    //for know if worker aviliable
+    let check = 0;
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
@@ -454,6 +467,9 @@ roombtnSecurite.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
+
+    //for know if worker aviliable
+    let check = 0;
 
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
@@ -473,6 +489,9 @@ roombtnReseption.addEventListener('click', () => {
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
+    //for know if worker aviliable
+    let check = 0;
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
@@ -491,6 +510,9 @@ roombtnPersonnel.addEventListener('click', () => {
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
+    //for know if worker aviliable
+    let check = 0;
+
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
 
@@ -508,6 +530,9 @@ roombtnArchives.addEventListener('click', () => {
 
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
+
+    //for know if worker aviliable
+    let check = 0;
 
     for (let i = 0; i < infoWorker.length; i++) {
         const role = infoWorker[i].role.toLowerCase().trim();
