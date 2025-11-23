@@ -429,7 +429,6 @@ function msgNoWorker(){
 
 //btn to show all can enter room confirence
 roombtnConfirence.addEventListener('click', () => {
-
     const showWorkers = document.querySelector(".workers");
     showWorkers.innerHTML = '';
 
