@@ -7,7 +7,6 @@
 ## Features
 
 * **Add Employees:** Easily add new employees with personal and professional details.
-* **Move Employees:** Drag and drop employees between rooms and zones.
 * **Delete Employees:** Remove employees from rooms or from the global list.
 * **Role-based Restrictions:** Only authorized employees can enter specific rooms.
 * **Experience Management:** Add work experience to employee profiles.
