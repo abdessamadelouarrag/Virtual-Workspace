@@ -37,7 +37,7 @@ git clone https://github.com/abdessamadelouarrag/Virtual-Workspace.git
 ## Usage
 
 1. Fill in the employee form to add a new employee.
-2. Drag employees to different rooms as needed.
+2. Drag employees to different rooms as needed (with out drag and drop).
 3. Use the sidebar to remove employees from rooms or from the system.
 4. Add experiences to employee profiles if applicable.
 5. The system will alert if invalid data is entered.
