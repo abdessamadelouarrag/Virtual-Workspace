@@ -7,9 +7,12 @@ const placeholderText = document.querySelector("#placeholderText");
 const bordCreate = document.querySelector(".place-workers");
 const formExperience = document.querySelector(".form-experience");
 const subForm = document.querySelector("#form-sub");
-let assignedWorkers = []
+// let assignedWorkers = []
 
-//
+//for stock info workers
+let infoWorker = [];
+
+//for stor function 
 let newDevF;
 
 //btn for add new worker
@@ -92,16 +95,18 @@ btnExperience.addEventListener('click', () => {
         })
     })
 })
-//for stock info workers
-let infoWorker = [];
+
 //all i need to take inputs from the form
 const inputNom = document.querySelector("#nom-worker");
 const inputPrenom = document.querySelector("#prenom-worker");
 const emailWorker = document.querySelector("#email-worker");
 const imageWorker = document.querySelector("#imageUrl");
 const roleWorker = document.querySelector("#role-worker");
+
 //part submit of form
 subForm.addEventListener('click', (e) => {
+
+    //remove default of submit refrech page
     e.preventDefault();
     //regex for inputs in the form
     const nomRegex = /^[A-Za-z]{3,}$/;
@@ -250,24 +255,25 @@ subForm.addEventListener('click', (e) => {
 `;
 
 
-        const sectionPopup = document.querySelector(".info-popup");
-        sectionPopup.innerHTML = '';
-        sectionPopup.classList.remove("hidden");
-        sectionPopup.append(infoPopup);
+    const sectionPopup = document.querySelector(".info-popup");
+    sectionPopup.innerHTML = '';
+    sectionPopup.classList.remove("hidden");
+    sectionPopup.append(infoPopup);
 
-        document.body.addEventListener('click', (e) => {
-            if (e.target === sectionPopup) {
-                sectionPopup.classList.add("hidden");
-            }
-        });
+    //for hidden section after click inside
+    document.body.addEventListener('click', (e) => {
+        if (e.target === sectionPopup) {
+            sectionPopup.classList.add("hidden");
+        }
+    });
     };
 
-
+    //show info worker after return to side bar
     newDiv.addEventListener('click', () => {
         newDevF(newDiv.id);
     })
 
-
+    //reset form and hidden after submit
     formExperience.innerHTML = ``;
     sectionForm.classList.add("hidden");
     sectionForm.querySelector("form").reset()
@@ -313,7 +319,7 @@ function card(i) {
 
         //part dyal narj3 worker l sidebar 
         const newWorkerSideBar = document.createElement("div");
-        newWorkerSideBar.className ="newOne flex justify-around items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer rounded-xl shadow-lg border border-gray-700 bg-gradient-to-r from-gray-500 to-black hover:from-gray-600 hover:to-gray-900 transition-all duration-300";
+        newWorkerSideBar.className = "newOne flex justify-around items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer rounded-xl shadow-lg border border-gray-700 bg-gray-600 hover:bg-gray-500";
         newWorkerSideBar.id = worker.id
         newWorkerSideBar.innerHTML = `
         <img src="${worker.imagE}" class="w-10 h-10 object-cover rounded-xl border border-gray-300"/>
