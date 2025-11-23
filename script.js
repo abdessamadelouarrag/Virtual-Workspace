@@ -27,6 +27,7 @@ document.body.addEventListener('click', (e) => {
     }
 });
 
+//function close form after click inside
 function closeForm() {
     sectionForm.classList.add("hidden");
     const form = sectionForm.querySelector("form");
@@ -347,7 +348,7 @@ function card(i) {
 //function check limit in rooms
 function checkLimit(container){
 
-    if(container.children.length >= 1){
+    if(container.children.length >= 5){
         return false;
     }
     return true;
