@@ -303,14 +303,14 @@ function card(i) {
     const worker = infoWorker[i];
 
     const cardDiv = document.createElement("div");
-    cardDiv.className = "card-room flex gap-2 p-1 w-[120px] h-[40px] rounded-xl shadow-md border border-gray-700 bg-gray-600 hover:bg-gray-500 items-center";
+    cardDiv.className = "card-room flex items-center mr-7 w-[60px] h-[23px] lg:w-[85px] lg:h-[40px] rounded-xl shadow-md border border-gray-700 bg-gray-600 hover:bg-gray-500";
 
     cardDiv.innerHTML = `
-        <img src="${worker.imagE}" class="w-6 h-6 rounded-lg border border-gray-300 object-cover">
+        <img src="${worker.imagE}" class="w-3 h-3 lg:w-5 lg:h-5 rounded-lg border border-gray-300 object-cover">
         <div class="flex flex-col">
-            <h5 class="font-semibold text-[8px] text-white">${worker.nom} ${worker.prenom}</h5>
-            <h5 class="text-[7px] text-gray-300">${worker.role}</h5>
-            <h5 class="text-[7px] text-gray-300">${worker.room}</h5>
+            <h5 class="font-semibold text-[5px] lg:text-[7px] text-white">${worker.nom}</h5>
+            <h5 class="text-[5px] lg:text-[7px] text-gray-300">${worker.role}</h5>
+            <h5 class="text-[5px] lg:text-[7px] text-gray-300">${worker.room}</h5>
         </div>
         <button class="delete-worker-room text-red-500 font-bold ml-auto hover:text-red-700 transition-colors duration-200">X</button>
     `;
