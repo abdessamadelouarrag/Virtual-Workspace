@@ -316,6 +316,7 @@ function card(i) {
     `;
 
     cardDiv.querySelector(".delete-worker-room").addEventListener('click', () => {
+        
         cardDiv.remove();
 
         //part dyal narj3 worker l sidebar 
@@ -351,7 +352,9 @@ function checkLimit(container){
     if(container.children.length >= 5){
         return false;
     }
-    return true;
+    if(container.children.length > 0){
+        return true;
+    }
 }
 
 //function to show workers in his roomes
@@ -392,15 +395,21 @@ function ShowInRoom(infoWorker, i, container) {
         sectionWorkers.classList.add("hidden");
     })
     tesOne.querySelector(".btn-add-to-room").addEventListener("click", () => {
-        
+
         // for check if false (limite) and stop
         if(checkLimit(container) == false){
             alert("Vous avez depass la limite ! ")
             return;
         }
 
+        // for remove bg red after add one worker
+        if(checkLimit(container) == true){
+            container.classList.remove("bg-red-600/50");
+        }
+
         infoWorker[i].room = container.id 
         container.append(card(i)); // add card to room
+
         tesOne.remove();
         //to remove worker after add in room in sidebar
         const sideBar = document.getElementById(infoWorker[i].id);
