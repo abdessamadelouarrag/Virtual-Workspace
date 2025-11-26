@@ -7,7 +7,6 @@ const placeholderText = document.querySelector("#placeholderText");
 const bordCreate = document.querySelector(".place-workers");
 const formExperience = document.querySelector(".form-experience");
 const subForm = document.querySelector("#form-sub");
-// let assignedWorkers = []
 
 //for stock info workers
 let infoWorker = [];
@@ -110,8 +109,8 @@ subForm.addEventListener('click', (e) => {
     //remove default of submit refrech page
     e.preventDefault();
     //regex for inputs in the form
-    const nomRegex = /^[A-Za-z]{3,}$/;
-    const prenomRegex = /^[A-Za-z]{3,}$/;
+    const nomRegex = /^[A-Za-z]+$/;
+    const prenomRegex = /^[A-Za-z]+$/;
     const roleRegex = /^[A-Za-z\s]{2,}$/;
     const emailRegex = /^[\w.-]+@[\w.-]+\.\w+$/;
     const imageurlRegex = /^https?:\/\//;
@@ -130,7 +129,7 @@ subForm.addEventListener('click', (e) => {
     const roleError = document.querySelector(".role-error");
 
 
-    //conditions of all regex
+    // conditions of all regex
     if (!nomRegex.test(nom)) {
         nameError.classList.remove("hidden");
         return;
@@ -175,7 +174,7 @@ subForm.addEventListener('click', (e) => {
     //for take all info from the form global and form experiences
     const workers = {
         id: Date.now(),
-        room : null,
+        room: null,
         nom,
         prenom,
         email,
@@ -256,17 +255,17 @@ subForm.addEventListener('click', (e) => {
 `;
 
 
-    const sectionPopup = document.querySelector(".info-popup");
-    sectionPopup.innerHTML = '';
-    sectionPopup.classList.remove("hidden");
-    sectionPopup.append(infoPopup);
+        const sectionPopup = document.querySelector(".info-popup");
+        sectionPopup.innerHTML = '';
+        sectionPopup.classList.remove("hidden");
+        sectionPopup.append(infoPopup);
 
-    //for hidden section after click inside
-    document.body.addEventListener('click', (e) => {
-        if (e.target === sectionPopup) {
-            sectionPopup.classList.add("hidden");
-        }
-    });
+        //for hidden section after click inside
+        document.body.addEventListener('click', (e) => {
+            if (e.target === sectionPopup) {
+                sectionPopup.classList.add("hidden");
+            }
+        });
     };
 
     //show info worker after return to side bar
@@ -316,10 +315,12 @@ function card(i) {
     `;
 
     cardDiv.querySelector(".delete-worker-room").addEventListener('click', () => {
-        
         cardDiv.remove();
 
-        //part dyal narj3 worker l sidebar 
+        //for reste room
+        worker.room = null;
+
+        //part back worker to side bar 
         const newWorkerSideBar = document.createElement("div");
         newWorkerSideBar.className = "newOne flex justify-around items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer rounded-xl shadow-lg border border-gray-700 bg-gray-600 hover:bg-gray-500";
         newWorkerSideBar.id = worker.id
@@ -347,12 +348,12 @@ function card(i) {
 }
 
 //function check limit in rooms
-function checkLimit(container){
+function checkLimit(container) {
 
-    if(container.children.length >= 5){
+    if (container.children.length >= 5) {
         return false;
     }
-    if(container.children.length > 0){
+    if (container.children.length > 0) {
         return true;
     }
 }
@@ -363,7 +364,7 @@ function ShowInRoom(infoWorker, i, container) {
     const showWorkers = document.querySelector(".workers");
 
     let showWorker = `
-    <div class="flex items-center gap-4 p-4 rounded-2xl border border-gray-700 bg-gray-500 shadow-md hover:shadow-lg hover:from-gray-600 hover:to-gray-900 transition-all duration-300 m-2">
+    <div class="workerInRoom flex items-center gap-4 p-4 rounded-2xl border border-gray-700 bg-gray-500 shadow-md hover:shadow-lg hover:from-gray-600 hover:to-gray-900 transition-all duration-300 m-2">
 
         <button class="btn-add-to-room bg-green-600 text-[8px] rounded-2xl text-white p-2 hover:bg-green-700 transition-colors duration-200">ADD</button>
 
@@ -406,7 +407,7 @@ function ShowInRoom(infoWorker, i, container) {
         if(checkLimit(container) == true){
             container.classList.remove("bg-red-600/50");
         }
-
+        console.log(infoWorker[i])
         infoWorker[i].room = container.id 
         container.append(card(i)); // add card to room
 
@@ -425,13 +426,13 @@ function ShowInRoom(infoWorker, i, container) {
 }
 
 //function to show msg no worker for this room
-function msgNoWorker(){
+function msgNoWorker() {
     const msgWorker = document.querySelector(".msg-no-worker");
     msgWorker.classList.remove("hidden");
 
     setTimeout(() => {
         msgWorker.classList.add("hidden");
-    },3000)
+    },2000)
 }
 
 /**this part for add worker in his room **/
