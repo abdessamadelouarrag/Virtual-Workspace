@@ -112,22 +112,6 @@ const emailWorker = document.querySelector("#email-worker");
 const imageWorker = document.querySelector("#imageUrl");
 const roleWorker = document.querySelector("#role-worker");
 
-
-const btnSkills = document.createElement("button");
-
-    btnSkills.textContent = "Add Skills";
-    btnSkills.className ="bg-red-600 p-3";
-    btnSkills.setAttribute("type", "button")
-
-    btnExperience.after(btnSkills);
-
-    btnSkills.addEventListener('click', () => {
-        const newElement = document.createElement("input");
-        newElement.setAttribute("placeholder", "add skills");
-        newElement.className ="skills"
-        btnSkills.after(newElement);
-    })
-
 //part submit of form
 subForm.addEventListener('click', (e) => {
 
@@ -196,14 +180,6 @@ subForm.addEventListener('click', (e) => {
         experienceWorker.push({ poste, dateStartExp, dateEndExp });
     });
 
-    let arraySkills =[];
-    const skills = document.querySelectorAll(".skills");
-
-    skills.forEach(elem => {
-        arraySkills.push(elem.value)
-    })
-
-
     //for take all info from the form global and form experiences
     const workers = {
         id: Date.now(),
@@ -214,7 +190,6 @@ subForm.addEventListener('click', (e) => {
         imagE,
         role: roleWorker.value,
         experience: experienceWorker,
-        skills : arraySkills,
     }
 
     //push the infoss
