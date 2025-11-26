@@ -58,32 +58,41 @@ btnExperience.addEventListener('click', () => {
 
     const newExp = document.createElement("div");
 
-    newExp.className = "form-new-exp"
+    newExp.className = "form-new-exp";
 
-    newExp.innerHTML = `<div class="form-exper bg-blue-900/10 border-2 rounded-2xl p-3 mt-6">
-                        <div class="flex justify-between">
-                            <h1 class="text-2xl font-semibold mb-6">Ajouter une Expérience</h1>
-                            <button class="btn-supp-exp text-red-600 uppercase font-bold" type="button">supprimer</button>
-                        </div>
-    
-                        <label class="flex flex-col mt-2">
-                            <span class="text-sm font-medium mb-2">Poste occupé</span>
-                            <input name="poste" type="text" required placeholder="Ex : Développeur IT"
-                                class="post-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
-                        </label>
-    
-                        <label class="flex flex-col mt-4">
-                            <span class="text-sm font-medium mb-2">Date de début</span>
-                            <input name="date_debut" type="date" id="date-start" required
-                                class="datestar-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
-                        </label>
-    
-                        <label class="flex flex-col mt-4">
-                            <span class="text-sm font-medium mb-2">Date de fin</span>
-                            <input name="date_fin" type="date" id="date-end"
-                                class="dateend-exp px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-300" />
-                        </label>
-                    </div>`
+newExp.innerHTML = `
+<div class="form-exper bg-gray-800/70 backdrop-blur-md border-2 border-gray-700 
+                rounded-2xl p-5 mt-6 shadow-lg hover:shadow-2xl 
+                transition-all duration-300 animate-[slideFade_0.5s_ease]">
+
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-bold text-white tracking-wide">Ajouter une Expérience</h1>
+        <button class="btn-supp-exp text-red-500 font-bold uppercase hover:text-red-600 
+                        transition-colors duration-200" type="button">supprimer</button>
+    </div>
+
+    <label class="flex flex-col mt-2">
+        <span class="text-sm font-medium mb-2 text-white">Poste occupé</span>
+        <input name="poste" type="text" required placeholder="Ex : Développeur IT"
+            class="post-exp px-4 py-2 border border-gray-600 rounded-lg bg-gray-700/30 
+                   text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+    </label>
+
+    <label class="flex flex-col mt-4">
+        <span class="text-sm font-medium mb-2 text-white">Date de début</span>
+        <input name="date_debut" type="date" id="date-start" required
+            class="datestar-exp px-4 py-2 border border-gray-600 rounded-lg bg-gray-700/30 
+                   text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+    </label>
+
+    <label class="flex flex-col mt-4">
+        <span class="text-sm font-medium mb-2 text-white">Date de fin</span>
+        <input name="date_fin" type="date" id="date-end"
+            class="dateend-exp px-4 py-2 border border-gray-600 rounded-lg bg-gray-700/30 
+                   text-white focus:outline-none focus:ring-2 focus:ring-indigo-400 transition" />
+    </label>
+</div>
+`;
 
     formExperience.append(newExp);
 
@@ -102,6 +111,22 @@ const inputPrenom = document.querySelector("#prenom-worker");
 const emailWorker = document.querySelector("#email-worker");
 const imageWorker = document.querySelector("#imageUrl");
 const roleWorker = document.querySelector("#role-worker");
+
+
+const btnSkills = document.createElement("button");
+
+    btnSkills.textContent = "Add Skills";
+    btnSkills.className ="bg-red-600 p-3";
+    btnSkills.setAttribute("type", "button")
+
+    btnExperience.after(btnSkills);
+
+    btnSkills.addEventListener('click', () => {
+        const newElement = document.createElement("input");
+        newElement.setAttribute("placeholder", "add skills");
+        newElement.className ="skills"
+        btnSkills.after(newElement);
+    })
 
 //part submit of form
 subForm.addEventListener('click', (e) => {
@@ -171,6 +196,14 @@ subForm.addEventListener('click', (e) => {
         experienceWorker.push({ poste, dateStartExp, dateEndExp });
     });
 
+    let arraySkills =[];
+    const skills = document.querySelectorAll(".skills");
+
+    skills.forEach(elem => {
+        arraySkills.push(elem.value)
+    })
+
+
     //for take all info from the form global and form experiences
     const workers = {
         id: Date.now(),
@@ -181,6 +214,7 @@ subForm.addEventListener('click', (e) => {
         imagE,
         role: roleWorker.value,
         experience: experienceWorker,
+        skills : arraySkills,
     }
 
     //push the infoss
@@ -190,22 +224,32 @@ subForm.addEventListener('click', (e) => {
     const newDiv = document.createElement('div');
     newDiv.id = workers.id
     newDiv.className =
-        "newOne flex justify-around items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer rounded-xl shadow-lg border border-gray-700 bg-gray-600 hover:bg-gray-500";
-    newDiv.innerHTML = `
+  "newOne flex items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer " +
+  "rounded-2xl shadow-xl border border-gray-700/60 bg-gray-800/60 " +
+  "backdrop-blur-lg hover:bg-gray-800/80 transition-all duration-300 " +
+  "hover:shadow-2xl hover:scale-[1.02] hover:border-blue-400/40 " +
+  "animate-[sidebarFade_0.4s_ease]";
+
+newDiv.innerHTML = `
     <img 
         src="${workers.imagE}" 
-        class="w-10 h-10 object-cover rounded-xl border border-gray-300"
+        class="w-12 h-12 object-cover rounded-2xl border border-gray-500/40 
+               shadow-[0_0_10px_rgba(255,255,255,0.15)]"
     />
-    <div class="grid gap-1">
-        <h5 class="text-[12px] font-semibold text-white">NOM : 
-            <span class="font-normal text-gray-300">${workers.nom}</span>
-        </h5> 
 
-        <h5 class="text-[12px] font-semibold text-white">ROLE : 
+    <div class="flex flex-col leading-tight">
+        <h5 class="text-[13px] font-semibold text-white tracking-wide">
+            NOM :
+            <span class="font-normal text-gray-300">${workers.nom}</span>
+        </h5>
+
+        <h5 class="text-[13px] font-semibold text-white tracking-wide">
+            ROLE :
             <span class="font-normal text-gray-300">${workers.role}</span>
         </h5>
     </div>
-    `;
+`;
+
     bordCreate.append(newDiv);
 
     newDevF = function (id) {
@@ -217,41 +261,70 @@ subForm.addEventListener('click', (e) => {
         let expPart = ``;
 
         worker.experience.forEach(exp => {
-            expPart += `
-        <br>
-        <h3 class="col-span-4 text-center font-bold text-white text-lg uppercase mt-4">Expériences</h3>
-        <div class="expCard border-2 border-gray-700 flex flex-wrap bg-gradient-to-r from-gray-500 to-black rounded-xl p-4 shadow-lg hover:from-gray-600 hover:to-gray-900 transition-all duration-300">
-            <div class="experience text-sm mt-3 text-white">
-                <p><span class="font-semibold text-gray-300">Poste :</span> ${exp.poste}</p>
-                <p><span class="font-semibold text-gray-300">Début :</span> ${exp.dateStartExp}</p>
-                <p><span class="font-semibold text-gray-300">Fin :</span> ${exp.dateEndExp}</p>
+    expPart += `
+        <div class="mt-4 animate-[cardFade_0.45s_ease]">
+
+            <h3 class="text-center font-bold text-white text-lg uppercase tracking-wide mb-3">
+                Expériences
+            </h3>
+
+            <div class="expCard flex flex-col gap-3 bg-gray-800/60 backdrop-blur-md 
+                        border border-gray-700 rounded-2xl p-5 shadow-xl 
+                        hover:bg-gray-800/80 transition-all duration-300 
+                        hover:translate-x-1 hover:shadow-2xl hover:scale-[1.02]">
+                
+                <p class="text-sm text-gray-300">
+                    <span class="font-semibold text-white">• Poste :</span> ${exp.poste}
+                </p>
+
+                <p class="text-sm text-gray-300">
+                    <span class="font-semibold text-white">• Début :</span> ${exp.dateStartExp}
+                </p>
+
+                <p class="text-sm text-gray-300">
+                    <span class="font-semibold text-white">• Fin :</span> ${exp.dateEndExp}
+                </p>
             </div>
         </div>
     `;
-        });
+});
 
-        infoPopup.innerHTML = `
-    <div class="all-info-popup w-full max-w-lg rounded-2xl shadow-xl p-4 h-[60vh] overflow-scroll [scrollbar-width:none] border-4 border-black/30 bg-gradient-to-b from-gray-600 to-black">
-        <div class="grid grid-cols-[1fr 2fr] gap-5 p-5">
+infoPopup.innerHTML = `
+<div class="all-info-popup w-full max-w-lg rounded-2xl shadow-2xl p-5 
+            h-[65vh] overflow-scroll [scrollbar-width:none] 
+            bg-gradient-to-b from-gray-700 to-black border border-gray-700/50
+            animate-[popupFade_0.5s_ease]">
 
-            <img src="${worker.imagE}" alt="Worker image" class="w-28 h-28 object-cover rounded-xl shadow-md border-amber-300/50 border-4">
+    <div class="grid grid-cols-[1fr_2fr] gap-6">
 
-            <div class="infos gap-2 text-sm col-span-1 rounded-xl shadow-lg p-3 bg-gray-800 border-[2px] border-gray-700 text-white">
-                <div class="border-b-2 border-gray-600 mb-3">
-                    <h3 class="font-bold text-center text-white"><i class="fas fa-person"></i> INFO GLOBAL</h3>
-                </div>
-                <h5><span class="font-semibold text-gray-300">Nom :</span> ${worker.nom}</h5>
-                <h5><span class="font-semibold text-gray-300">Prénom :</span> ${worker.prenom}</h5>
-                <h5><span class="font-semibold text-gray-300">Rôle :</span> ${worker.role}</h5>
-                <h5><span class="font-semibold text-gray-300">Email :</span> ${worker.email}</h5>
-            </div>
+        <!-- IMAGE -->
+        <img src="${worker.imagE}" alt="Worker image" 
+            class="w-32 h-32 object-cover rounded-2xl border-4 border-gray-400/40
+                   shadow-lg animate-[glowPulse_2s_ease-in-out_infinite]">
 
-            <div class="col-span-2">
-                ${expPart || `<p class="text-gray-300 text-center mt-4">No Experiences</p>`}
-            </div>
+        <!-- INFO GLOBAL -->
+        <div class="infos text-sm rounded-2xl shadow-md p-4 
+                    bg-gray-900/70 border border-gray-700 text-white 
+                    animate-[cardFade_0.5s_ease]">
 
+            <h3 class="font-bold text-center mb-3 text-white tracking-wide 
+                       border-b border-gray-600 pb-2">
+                <i class="fas fa-user"></i> INFO GLOBAL
+            </h3>
+
+            <h5><span class="font-semibold text-gray-300">Nom :</span> ${worker.nom}</h5>
+            <h5><span class="font-semibold text-gray-300">Prénom :</span> ${worker.prenom}</h5>
+            <h5><span class="font-semibold text-gray-300">Rôle :</span> ${worker.role}</h5>
+            <h5><span class="font-semibold text-gray-300">Email :</span> ${worker.email}</h5>
         </div>
+
+        <!-- EXPERIENCES -->
+        <div class="col-span-2 animate-[cardFade_0.6s_ease]">
+            ${expPart || `<p class="text-gray-300 text-center mt-4">No Experiences</p>`}
+        </div>
+
     </div>
+</div>
 `;
 
 
@@ -302,17 +375,33 @@ function card(i) {
     const worker = infoWorker[i];
 
     const cardDiv = document.createElement("div");
-    cardDiv.className = "card-room flex items-center mr-7 w-[60px] h-[23px] lg:w-[85px] lg:h-[40px] rounded-xl shadow-md border border-gray-700 bg-gray-600 hover:bg-gray-500";
+    cardDiv.className =
+  "card-room flex items-center gap-1 lg:gap-2 mr-7 w-[70px] h-[28px] " +
+  "lg:w-[100px] lg:h-[45px] rounded-xl shadow-md border " +
+  "bg-gray-700/40 border-gray-600/60 backdrop-blur-md " +
+  "hover:bg-gray-700/60 hover:shadow-xl hover:shadow-blue-500/20 " +
+  "transition-all duration-300 animate-[miniCardFade_0.3s_ease]";
 
-    cardDiv.innerHTML = `
-        <img src="${worker.imagE}" class="w-3 h-3 lg:w-5 lg:h-5 rounded-lg border border-gray-300 object-cover">
-        <div class="flex flex-col">
-            <h5 class="font-semibold text-[5px] lg:text-[7px] text-white">${worker.nom}</h5>
-            <h5 class="text-[5px] lg:text-[7px] text-gray-300">${worker.role}</h5>
-            <h5 class="text-[5px] lg:text-[7px] text-gray-300">${worker.room}</h5>
-        </div>
-        <button class="delete-worker-room text-red-500 font-bold ml-auto hover:text-red-700 transition-colors duration-200">X</button>
-    `;
+cardDiv.innerHTML = `
+    <img 
+        src="${worker.imagE}" 
+        class="w-4 h-4 lg:w-6 lg:h-6 rounded-lg object-cover border border-gray-400/60 
+        shadow-[0_0_5px_rgba(255,255,255,0.3)]"
+    >
+
+    <div class="flex flex-col leading-tight">
+        <h5 class="font-semibold text-[6px] lg:text-[8px] text-white">${worker.nom}</h5>
+        <h5 class="text-[5px] lg:text-[7px] text-gray-300">${worker.role}</h5>
+        <h5 class="text-[5px] lg:text-[7px] text-gray-400">${worker.room}</h5>
+    </div>
+
+    <button 
+        class="delete-worker-room text-red-400 font-bold ml-auto 
+        hover:text-red-600 transition-all duration-200 text-[8px] lg:text-[10px]">
+        ✖
+    </button>
+`;
+
 
     cardDiv.querySelector(".delete-worker-room").addEventListener('click', () => {
         cardDiv.remove();
@@ -322,20 +411,35 @@ function card(i) {
 
         //part back worker to side bar 
         const newWorkerSideBar = document.createElement("div");
-        newWorkerSideBar.className = "newOne flex justify-around items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer rounded-xl shadow-lg border border-gray-700 bg-gray-600 hover:bg-gray-500";
-        newWorkerSideBar.id = worker.id
-        newWorkerSideBar.innerHTML = `
-        <img src="${worker.imagE}" class="w-10 h-10 object-cover rounded-xl border border-gray-300"/>
-        <div class="grid gap-1">
-            <h5 class="text-[12px] font-semibold text-white">NOM : 
-                <span class="font-normal text-gray-300">${worker.nom}</span>
-            </h5> 
+        newWorkerSideBar.className =
+  "newOne flex items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer " +
+  "rounded-2xl shadow-xl border border-gray-700/60 bg-gray-800/60 " +
+  "backdrop-blur-lg hover:bg-gray-800/80 transition-all duration-300 " +
+  "hover:shadow-2xl hover:scale-[1.02] hover:border-blue-400/40 " +
+  "animate-[sidebarFade_0.4s_ease]";
 
-            <h5 class="text-[12px] font-semibold text-white">ROLE : 
-                <span class="font-normal text-gray-300">${worker.role}</span>
-            </h5>
-        </div>
-        `;
+newWorkerSideBar.id = worker.id;
+
+newWorkerSideBar.innerHTML = `
+    <img 
+        src="${worker.imagE}" 
+        class="w-12 h-12 object-cover rounded-2xl border border-gray-500/40 
+               shadow-[0_0_10px_rgba(255,255,255,0.15)]"
+    />
+
+    <div class="flex flex-col leading-tight">
+        <h5 class="text-[13px] font-semibold text-white tracking-wide">
+            NOM :
+            <span class="font-normal text-gray-300">${worker.nom}</span>
+        </h5>
+
+        <h5 class="text-[13px] font-semibold text-white tracking-wide">
+            ROLE :
+            <span class="font-normal text-gray-300">${worker.role}</span>
+        </h5>
+    </div>
+`;
+
         bordCreate.appendChild(newWorkerSideBar);
         infoWorker.push(worker);
 
@@ -364,19 +468,33 @@ function ShowInRoom(infoWorker, i, container) {
     const showWorkers = document.querySelector(".workers");
 
     let showWorker = `
-    <div class="workerInRoom flex items-center gap-4 p-4 rounded-2xl border border-gray-700 bg-gray-500 shadow-md hover:shadow-lg hover:from-gray-600 hover:to-gray-900 transition-all duration-300 m-2">
+    <div class="workerInRoom flex items-center gap-4 p-4 rounded-3xl border border-gray-700 
+            bg-gradient-to-r from-gray-800 to-gray-700 shadow-xl hover:shadow-2xl 
+            transition-all duration-300 m-2 animate-[slideFade_0.5s_ease] hover:scale-[1.02]">
 
-        <button class="btn-add-to-room bg-green-600 text-[8px] rounded-2xl text-white p-2 hover:bg-green-700 transition-colors duration-200">ADD</button>
+    <!-- ADD button -->
+    <button class="btn-add-to-room bg-green-600 text-[9px] rounded-2xl text-white px-3 py-1 
+            hover:bg-green-500 transition-colors duration-200 shadow-sm hover:shadow-md uppercase tracking-wide font-semibold">
+        ADD
+    </button>
 
-        <img src="${infoWorker[i].imagE}" 
-            class="w-14 h-14 object-cover rounded-xl border border-gray-300">
+    <!-- Worker image -->
+    <img src="${infoWorker[i].imagE}" 
+        class="w-16 h-16 lg:w-20 lg:h-20 object-cover rounded-2xl border border-gray-400 
+               shadow-inner transition-all duration-300 hover:scale-105 hover:shadow-lg"/>
 
-        <div class="flex flex-col gap-1">
-            <h5 class="text-[13px] font-semibold text-white">NOM : <span class="font-normal text-gray-300">${infoWorker[i].nom}</span></h5>
-            <h5 class="text-[13px] font-semibold text-white">ROLE : <span class="font-normal text-gray-300">${infoWorker[i].role}</span></h5>
-        </div>
+    <!-- Worker info -->
+    <div class="flex flex-col gap-1">
+        <h5 class="text-[13px] lg:text-[14px] font-semibold text-white tracking-wide">
+            NOM : <span class="font-normal text-gray-300">${infoWorker[i].nom}</span>
+        </h5>
+        <h5 class="text-[13px] lg:text-[14px] font-semibold text-white tracking-wide">
+            ROLE : <span class="font-normal text-gray-300">${infoWorker[i].role}</span>
+        </h5>
     </div>
-`;
+</div>
+
+`
 
     const tesOne = document.createElement("div");
     tesOne.className = "w-full place-self-center"
