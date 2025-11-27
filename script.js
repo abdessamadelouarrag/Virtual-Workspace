@@ -389,28 +389,28 @@ cardDiv.innerHTML = `
         //part back worker to side bar 
         const newWorkerSideBar = document.createElement("div");
         newWorkerSideBar.className =
-  "newOne flex items-center gap-4 mt-3 p-4 w-full max-w-md cursor-pointer " +
-  "rounded-2xl shadow-xl border border-gray-700/60 bg-gray-800/60 " +
+  "newOne flex items-center gap-3 mt-3 p-3 w-full max-w-sm cursor-pointer " +
+  "rounded-xl shadow-lg border border-gray-700/60 bg-gray-800/60 " +
   "backdrop-blur-lg hover:bg-gray-800/80 transition-all duration-300 " +
-  "hover:shadow-2xl hover:scale-[1.02] hover:border-blue-400/40 " +
-  "animate-[sidebarFade_0.4s_ease]";
+  "hover:shadow-2xl hover:scale-[1.01] hover:border-blue-400/40 " +
+  "animate-[sidebarFade_0.4s_ease] sm:gap-4 sm:p-4";
 
 newWorkerSideBar.id = worker.id;
 
 newWorkerSideBar.innerHTML = `
-    <img 
+  <img 
         src="${worker.imagE}" 
-        class="w-12 h-12 object-cover rounded-2xl border border-gray-500/40 
-               shadow-[0_0_10px_rgba(255,255,255,0.15)]"
+        class="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-xl border border-gray-500/40
+               shadow-[0_0_8px_rgba(255,255,255,0.12)]"
     />
 
-    <div class="flex flex-col leading-tight">
-        <h5 class="text-[13px] font-semibold text-white tracking-wide">
+    <div class="flex flex-col text-center leading-tight w-full">
+        <h5 class="text-[12px] sm:text-[13px] font-semibold text-white tracking-wide">
             NOM :
             <span class="font-normal text-gray-300">${worker.nom}</span>
         </h5>
 
-        <h5 class="text-[13px] font-semibold text-white tracking-wide">
+        <h5 class="text-[12px] sm:text-[13px] font-semibold text-white tracking-wide">
             ROLE :
             <span class="font-normal text-gray-300">${worker.role}</span>
         </h5>
